@@ -5,7 +5,7 @@ module Jquery
       class_option :ui, :type => :boolean, :default => false, :desc => "Indicates when to Include JQueryUI (minified version; source: Google Libraries API)"
 
       def remove_prototype
-        %w(controls.js dragdrop.js effects.js prototype.js rails.js).each do |js|
+        %w(controls.js dragdrop.js effects.js prototype.js).each do |js|
           remove_file "public/javascripts/#{js}"
         end
       end
