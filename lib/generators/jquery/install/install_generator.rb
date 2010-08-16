@@ -1,6 +1,6 @@
 module Jquery
   module Generators
-    class InstallGenerator < Rails::Generators::Base
+    class InstallGenerator < ::Rails::Generators::Base
       desc "This generator downloads and installs jQuery 1.4.2, jQuery-ujs HEAD, and (optionally) jQuery UI 1.8.4"
       class_option :ui, :type => :boolean, :default => false, :desc => "Indicates when to Include JQueryUI (minified version; source: Google Libraries API)"
 
