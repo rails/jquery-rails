@@ -1,7 +1,7 @@
 PATH
   remote: /Users/andre/sw/gems/jquery-rails
   specs:
-    jquery-rails (0.1.2)
+    jquery-rails (0.1.3)
       rails (~> 3.0.0)
 
 GEM
