@@ -12,6 +12,6 @@ In your Gemfile, add this line:
 
 Then, run `bundle install`. To invoke the generator, run:
 
-    rails generate jquery:install #--ui to enable jQuery UI
+    rails generate jquery:install #--ui to enable jQuery UI --version to install specific version of JQuery (default is 1.4.2)
 
 You're done! Don't forget to output `csrf_meta_tag` somewhere inside your `<head>` tag in your layout!
