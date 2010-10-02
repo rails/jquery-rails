@@ -15,3 +15,9 @@ Then, run `bundle install`. To invoke the generator, run:
     rails generate jquery:install #--ui to enable jQuery UI --version to install specific version of JQuery (default is 1.4.2)
 
 You're done! Don't forget to output `csrf_meta_tag` somewhere inside your `<head>` tag in your layout!
+
+### Edge rails
+
+If you're using edge Rails, you'll need to use the branch that depends on Rails `~> 3.1`. Here's the line to put in your Gemfile, and everything else is the same:
+
+    gem "jquery-rails", :git => "http://github.com/indirect/jquery-rails.git", :branch => "rails-3-1"
