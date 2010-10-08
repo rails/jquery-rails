@@ -18,6 +18,4 @@ You're done! Don't forget to output `csrf_meta_tag` somewhere inside your `<head
 
 ### Edge rails
 
-If you're using edge Rails, you'll need to use the branch that depends on Rails `~> 3.1`. Here's the line to put in your Gemfile, and everything else is the same:
-
-    gem "jquery-rails", :git => "http://github.com/indirect/jquery-rails.git", :branch => "rails-3-1"
+If you're using edge Rails, everything should just work starting with version 0.2.2. If it's not working, try running `bundle update jquery-rails`, or change your Gemfile to read `gem "jquery-rails", "~>0.2"`.
