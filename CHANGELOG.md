@@ -1,3 +1,9 @@
+## 0.2.2 (8 October 2010)
+
+Feature:
+
+  - Depend on Rails >=3.0 && <4.0 for edge Rails compatibility
+
 ## 0.2.1 (2 October 2010)
 
 Bugfix:
