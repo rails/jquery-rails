@@ -1,12 +1,6 @@
-describe "jQuery-Rails" do
-  def get_js_defaults(name, env = "production")
-    dir = File.expand_path("../support/#{name}_app", __FILE__)
-    Dir.chdir(dir) do
-      `bundle install --local`
-      `rails runner -e #{env} 'puts Rails.application.config.action_view.
-        javascript_expansions[:defaults].inspect'`.chomp
-    end
-  end
+require 'spec_helper'
+
+describe "The jQuery-Rails railtie" do
 
   it "changes the default javascript expansion" do
     get_js_defaults("default").should == ["jquery.min", "rails"].inspect
@@ -18,6 +12,15 @@ describe "jQuery-Rails" do
 
   it "changes allows overriding the javascript expansion" do
     get_js_defaults("custom").should == ["foo", "bar", "baz"].inspect
+  end
+
+  def get_js_defaults(name, env = "production")
+    dir = File.expand_path("../../support/#{name}_app", __FILE__)
+    Dir.chdir(dir) do
+      `bundle install --local`
+      `rails runner -e #{env} 'puts Rails.application.config.action_view.
+        javascript_expansions[:defaults].inspect'`.chomp
+    end
   end
 
 end
