@@ -1,5 +1,4 @@
-require 'rubygems'
-require 'test/unit'
+# Setup for generator tests
 require 'rails/all'
 require 'rails/generators'
 require 'rails/generators/test_case'
@@ -19,5 +18,3 @@ Rails.application.config.root = Rails.root
 # Call configure to load the settings from
 # Rails.application.config.generators to Rails::Generators
 Rails::Generators.configure!
-
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
