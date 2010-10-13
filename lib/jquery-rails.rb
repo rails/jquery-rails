@@ -4,9 +4,9 @@ module Jquery
       config.before_configuration do
         if ::Rails.root.join("public/javascripts/jquery-ui.min.js").exist?
           jq_defaults = %w(jquery jquery-ui)
-          jq_defaults.map!{|a| a + ".min" } unless ::Rails.env.development?
+          jq_defaults.map!{|a| a + ".min" } if ::Rails.env.production?
         else
-          jq_defaults = ::Rails.env.development? ? %w(jquery) : %w(jquery.min)
+          jq_defaults = ::Rails.env.production? ? %w(jquery.min) : %w(jquery)
         end
         config.action_view.javascript_expansions[:defaults] = jq_defaults + %w(rails)
       end
