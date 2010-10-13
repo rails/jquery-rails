@@ -10,7 +10,7 @@ Rails.application = TestApp
 
 module Rails
   def self.root
-    @root ||= File.expand_path(File.join(File.dirname(__FILE__), '..', 'tmp', 'rails'))
+    @root ||= File.expand_path("../../tmp/rails", __FILE__)
   end
 end
 Rails.application.config.root = Rails.root
