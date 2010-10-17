@@ -1,11 +1,10 @@
 module Jquery
   module Generators
     class InstallGenerator < ::Rails::Generators::Base
-      desc "This generator downloads and installs jQuery, jQuery-ujs HEAD, and (optionally) jQuery UI 1.8.4"
-      class_option :ui, :type => :boolean, :default => false, :desc => "Whether to Include JQueryUI"
-      class_option :version, :type => :string, :default => "1.4.1", :desc => "Which version of JQuery to fetch"
-      @@versions = %w( 1.4.3 1.4.2 1.4.1 1.4.0 1.3.2 1.3.1 1.3.0 1.2.6 )
-
+      desc "This generator downloads and installs jQuery, jQuery-ujs HEAD, and (optionally) the newest jQuery UI"
+      class_option :ui, :type => :boolean, :default => false, :desc => "Include jQueryUI"
+      class_option :version, :type => :string, :default => "1.4.3", :desc => "Which version of jQuery to fetch"
+      @@default_version = "1.4.3"
 
       def remove_prototype
         %w(controls.js dragdrop.js effects.js prototype.js).each do |js|
@@ -14,33 +13,32 @@ module Jquery
       end
 
       def download_jquery
-        # Downloading latest jQuery
-        if @@versions.include?(options.version)
-          puts "Fetching JQuery version #{options.version}!"
-          get "http://ajax.googleapis.com/ajax/libs/jquery/#{options.version}/jquery.min.js", "public/javascripts/jquery.min.js"
-          get "http://ajax.googleapis.com/ajax/libs/jquery/#{options.version}/jquery.js", "public/javascripts/jquery.js"
-        else
-          # Try to get it anyway
-          begin
-            puts "Trying to fetch JQuery version #{options.version}, even though I don't know about it.'"
-            get "http://ajax.googleapis.com/ajax/libs/jquery/#{options.version}/jquery.min.js", "public/javascripts/jquery.min.js"
-            get "http://ajax.googleapis.com/ajax/libs/jquery/#{options.version}/jquery.js", "public/javascripts/jquery.js"
-            puts "Success"
-          rescue
-            puts "JQuery #{options.version} is invalid; fetching #{@@versions[2]} instead."
-            get "http://ajax.googleapis.com/ajax/libs/jquery/#{@@versions[2]}/jquery.min.js", "public/javascripts/jquery.min.js"
-            get "http://ajax.googleapis.com/ajax/libs/jquery/#{@@versions[2]}/jquery.js", "public/javascripts/jquery.js"
-          end
-        end
+        say_status("fetching", "jQuery (#{options.version})", :green)
+        get_jquery(options.version)
+      rescue OpenURI::HTTPError
+        say_status("warning", "could not find jQuery (#{options.version})", :yellow)
+        say_status("fetching", "jQuery (#{@@default_version})", :green)
+        get_jquery(@@default_version)
+      end
 
-        # Downloading latest jQueryUI minified
-        get "http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js", "public/javascripts/jquery-ui.min.js" if options.ui?
-        get "http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js", "public/javascripts/jquery-ui.js" if options.ui?
+      def download_jquery_ui
+        if options.ui?
+          say_status("fetching", "jQuery UI (latest 1.x release)", :green)
+          get "http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js",     "public/javascripts/jquery-ui.js"
+          get "http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js", "public/javascripts/jquery-ui.min.js"
+        end
       end
 
       def download_ujs_driver
-        # Downloading latest jQuery drivers
+        say_status("fetching", "jQuery UJS adapter (github HEAD)", :green)
         get "http://github.com/rails/jquery-ujs/raw/master/src/rails.js", "public/javascripts/rails.js"
+      end
+
+    private
+
+      def get_jquery(version)
+        get "http://ajax.googleapis.com/ajax/libs/jquery/#{version}/jquery.js",     "public/javascripts/jquery.js"
+        get "http://ajax.googleapis.com/ajax/libs/jquery/#{version}/jquery.min.js", "public/javascripts/jquery.min.js"
       end
 
     end
