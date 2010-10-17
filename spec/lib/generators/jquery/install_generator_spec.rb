@@ -9,7 +9,11 @@ class Jquery::Generators::InstallGeneratorTest < Rails::Generators::TestCase
   tests Jquery::Generators::InstallGenerator
   arguments []
 
-  setup :prepare_destination
+  before(:each) do
+    prepare_destination
+    @response = {:body => "abc", :status => 200,  :headers => { 'Content-Length' => 3 } }
+    stub_request(:get, /ajax.googleapis.com|github.com/).to_return(@response)
+  end
 
   it "should install jquery" do
     run_generator
