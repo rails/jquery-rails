@@ -1,3 +1,20 @@
+## 0.2.4 (16 October 2010)
+
+Features:
+
+  - Updated to use the new jQuery 1.4.3 by default, with the IE .live() bug fixed
+  - Always download the newest 1.x release of jQuery UI
+  - Try to install unknown versions of jQuery, with fallback to the default
+  - Print informative messages in the correct Generator style
+
+## 0.2.3 (13 October 2010)
+
+Features:
+
+  - Support Edge Rails 3.1 by depending on Rails ~>3.0
+  - Add Sam Ruby's assert_select_jquery test helper method
+  - Use jquery.min only in production (and not in the test env)
+
 ## 0.2.2 (8 October 2010)
 
 Feature:
