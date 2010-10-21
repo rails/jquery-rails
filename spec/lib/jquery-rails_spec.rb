@@ -14,12 +14,36 @@ describe "The jQuery-Rails railtie" do
     get_js_defaults("custom").should == ["foo", "bar", "baz"].inspect
   end
 
-  def get_js_defaults(name, env = "production")
-    dir = File.expand_path("../../support/#{name}_app", __FILE__)
+  it "ouputs with .js extensions in production" do
+    get_javascript_include_tag("default").should =~ /jquery.min.js/
+  end
+
+  it "outputs with .js extensions in development" do
+    get_javascript_include_tag("default", "development").should =~ /jquery.js/
+  end
+
+
+  # Helper methods
+
+  def get_js_defaults(app, env = "production")
+    cmd = "Rails.application.config.action_view.
+      javascript_expansions[:defaults]"
+    run(app, cmd, env)
+  end
+
+  def get_javascript_include_tag(app, env = "production")
+    cmd = "Rails.application.config.action_controller.
+      each{|k,v| ActionController::Base.helpers.config[k]=v} &&
+      ActionController::Base.helpers.javascript_include_tag(:defaults)"
+    run(app, cmd, env)
+  end
+
+  def run(app, expr, env)
+    dir = File.expand_path("../../support/#{app}_app", __FILE__)
     Dir.chdir(dir) do
-      `bundle install --local`
-      `rails runner -e #{env} 'puts Rails.application.config.action_view.
-        javascript_expansions[:defaults].inspect'`.chomp
+      `bundle check || bundle install --local`
+      cmd = "rails runner -e #{env} 'puts #{expr}.inspect'"
+      `#{cmd}`.chomp
     end
   end
 
