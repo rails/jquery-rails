@@ -31,7 +31,7 @@ module Jquery
 
       def download_ujs_driver
         say_status("fetching", "jQuery UJS adapter (github HEAD)", :green)
-        get "http://github.com/rails/jquery-ujs/raw/master/src/rails.js", "public/javascripts/rails.js"
+        get "https://github.com/rails/jquery-ujs/raw/master/src/rails.js", "public/javascripts/rails.js"
       end
 
     private
