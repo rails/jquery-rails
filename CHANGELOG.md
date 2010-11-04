@@ -1,3 +1,9 @@
+## 0.2.5 (4 November 2010)
+
+Bugfix:
+
+  - Download JQuery Rails UJS via HTTPS since Github is now HTTPS only
+
 ## 0.2.4 (16 October 2010)
 
 Features:
