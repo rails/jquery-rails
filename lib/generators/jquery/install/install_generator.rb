@@ -3,8 +3,9 @@ module Jquery
     class InstallGenerator < ::Rails::Generators::Base
       desc "This generator downloads and installs jQuery, jQuery-ujs HEAD, and (optionally) the newest jQuery UI"
       class_option :ui, :type => :boolean, :default => false, :desc => "Include jQueryUI"
-      class_option :version, :type => :string, :default => "1.4.3", :desc => "Which version of jQuery to fetch"
-      @@default_version = "1.4.3"
+      class_option :version, :type => :string, :default => "1.4.4", :desc => "Which version of jQuery to fetch"
+      @@default_version = "1.4.4"
+      OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
       def remove_prototype
         %w(controls.js dragdrop.js effects.js prototype.js).each do |js|
