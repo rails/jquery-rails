@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jquery-rails (0.2.4)
+    jquery-rails (0.2.6)
       rails (~> 3.0)
       thor (~> 0.14.4)
 
