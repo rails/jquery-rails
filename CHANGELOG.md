@@ -1,3 +1,7 @@
+## 0.2.7 (5 February 2011)
+
+  - Updated to use jQuery 1.5 by default
+
 ## 0.2.6 (1 December 2010)
 
 Feature:
