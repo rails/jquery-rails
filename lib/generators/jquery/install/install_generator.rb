@@ -11,9 +11,9 @@ module Jquery
       class_option :version, :type => :string, :default => @@jquery_version, :desc => "Which version of jQuery to fetch"
       source_root File.expand_path('../../../../../vendor/assets/javascripts', __FILE__)
 
-      def remove_old_javascripts
-        %w(controls.js dragdrop.js effects.js prototype.js).each do |js|
-          remove_file "public/javascripts/#{js}"
+      def remove_prototype
+        PROTOTYPE_JS.each do |name|
+          remove_file "public/javascripts/#{name}.js"
         end
       end
 
