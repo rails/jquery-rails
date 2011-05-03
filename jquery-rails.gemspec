@@ -14,11 +14,11 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "jquery-rails"
 
-  s.add_dependency "rails", "~> 3.0"
+  s.add_dependency "rails", "~> 3.1"
   s.add_dependency "thor",  "~>0.14.4"
   s.add_development_dependency "bundler", "~> 1.0.0"
   s.add_development_dependency "rspec",   "~> 1.3"
-  s.add_development_dependency "webmock", "~> 1.4.0"
+  s.add_development_dependency "webmock", "~> 1.6.2"
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").select{|f| f =~ /^bin/}

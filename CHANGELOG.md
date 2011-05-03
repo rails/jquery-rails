@@ -1,3 +1,9 @@
+## 0.3.0 (2 May 2011)
+
+  - Rails 3.1 asset pipeline edition
+  - Removes generators and railties
+  - Just provides jquery.js and jquery_ujs.js
+
 ## 0.2.7 (5 February 2011)
 
   - Updated to use jQuery 1.5 by default
