@@ -1,10 +1,10 @@
 module Jquery
   module Rails
 
-    class Engine < ::Rails::Engine
-      config.before_configuration do
-        require "jquery-rails/assert_select_jquery" if ::Rails.env.test?
-      end
+    if ::Rails.version < "3.1"
+      require 'jquery-rails/railtie'
+    else
+      require 'jquery-rails/engine'
     end
 
   end
