@@ -1,5 +1,5 @@
 module Jquery
   module Rails
-    VERSION = "0.3"
+    VERSION = "1.0.beta"
   end
 end
