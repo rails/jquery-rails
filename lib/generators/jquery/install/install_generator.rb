@@ -39,8 +39,8 @@ module Jquery
     private
 
       def get_jquery(version)
-        get "http://ajax.googleapis.com/ajax/libs/jquery/#{version}/jquery.js",     "public/javascripts/jquery.js"
-        get "http://ajax.googleapis.com/ajax/libs/jquery/#{version}/jquery.min.js", "public/javascripts/jquery.min.js"
+        get "http://code.jquery.com/jquery-#{version}.js",     "public/javascripts/jquery.js"
+        get "http://code.jquery.com/jquery-#{version}.min.js", "public/javascripts/jquery.min.js"
       end
 
     end
