@@ -9,8 +9,12 @@ Also provided is Sam Ruby's assert_select_jquery function, which is automaticall
 
 ### Installation
 
-In your Gemfile, add this line:
+When you generate a new Rails 3.1 app, pass the `-j jquery` option, like this:
+
+    rails new myapp -j jquery
+
+Your new app's Gemfile will have a line like this:
 
     gem "jquery-rails"
 
-Then, run `bundle install`. You're done!
+Then run `bundle install`. You're done!
