@@ -42,6 +42,7 @@ module ActionDispatch
       #   assert_select '#current_item'
       # end
 
+      PATTERN_HTML  = "\"((\\\\\"|[^\"])*)\""
       def assert_select_jquery(*args, &block)
         jquery_method = args.first.is_a?(Symbol) ? args.shift : nil
         jquery_opt    = args.first.is_a?(Symbol) ? args.shift : nil
@@ -49,7 +50,7 @@ module ActionDispatch
 
         pattern = "\\.#{jquery_method || '\\w+'}\\("
         pattern = "#{pattern}['\"]#{jquery_opt}['\"],?\\s*" if jquery_opt
-        pattern = "#{pattern}#{RJS_PATTERN_HTML}" if block
+        pattern = "#{pattern}#{PATTERN_HTML}" if block
         pattern = "(?:jQuery|\\$)\\(['\"]#{id}['\"]\\)#{pattern}" if id
 
         fragments = []
