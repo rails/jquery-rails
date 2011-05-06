@@ -3,44 +3,37 @@ require 'rails'
 module Jquery
   module Generators
     class InstallGenerator < ::Rails::Generators::Base
-      desc "This generator downloads and installs jQuery, jQuery-ujs HEAD, and (optionally) the newest jQuery UI"
+      @@jquery_version = "1.6"
+      @@jquery_ui_version = "1.8.12"
+      @@jquery_ujs_version = "a634e7507d45249731b79a801034097e330d27d1"
+      desc "This generator installs jQuery #{@@jquery_version}, jQuery-ujs, and (optionally) jQuery UI #{@@jquery_ui_version}"
       class_option :ui, :type => :boolean, :default => false, :desc => "Include jQueryUI"
-      class_option :version, :type => :string, :default => "1.6", :desc => "Which version of jQuery to fetch"
-      @@default_version = "1.6"
+      class_option :version, :type => :string, :default => @@jquery_version, :desc => "Which version of jQuery to fetch"
+      source_root File.expand_path('../../../../../vendor/assets/javascripts', __FILE__)
 
-      def remove_prototype
+      def remove_old_javascripts
         %w(controls.js dragdrop.js effects.js prototype.js).each do |js|
           remove_file "public/javascripts/#{js}"
         end
       end
 
-      def download_jquery
-        say_status("fetching", "jQuery (#{options.version})", :green)
-        get_jquery(options.version)
-      rescue OpenURI::HTTPError
-        say_status("warning", "could not find jQuery (#{options.version})", :yellow)
-        say_status("fetching", "jQuery (#{@@default_version})", :green)
-        get_jquery(@@default_version)
+      def copy_jquery
+        say_status("copying", "jQuery (#{@@jquery_version})", :green)
+        copy_file "jquery.js", "public/javascripts/jquery.js"
+        copy_file "jquery.min.js", "public/javascripts/jquery.min.js"
       end
 
-      def download_jquery_ui
+      def copy_jquery_ui
         if options.ui?
-          say_status("fetching", "jQuery UI (latest 1.x release)", :green)
-          get "http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js",     "public/javascripts/jquery-ui.js"
-          get "http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js", "public/javascripts/jquery-ui.min.js"
+          say_status("copying", "jQuery UI (#{@@jquery_ui_version})", :green)
+          copy_file "jquery-ui.js", "public/javascripts/jquery-ui.js"
+          copy_file "jquery-ui.min.js", "public/javascripts/jquery-ui.min.js"
         end
       end
 
-      def download_ujs_driver
-        say_status("fetching", "jQuery UJS adapter (github HEAD)", :green)
-        get "https://github.com/rails/jquery-ujs/raw/master/src/rails.js", "public/javascripts/rails.js"
-      end
-
-    private
-
-      def get_jquery(version)
-        get "http://code.jquery.com/jquery-#{version}.js",     "public/javascripts/jquery.js"
-        get "http://code.jquery.com/jquery-#{version}.min.js", "public/javascripts/jquery.min.js"
+      def copy_ujs_driver
+        say_status("copying", "jQuery UJS adapter (#{@@jquery_ujs_version[0..5]})", :green)
+        copy_file "jquery_ujs.js", "public/javascripts/jquery_ujs.js"
       end
 
     end
