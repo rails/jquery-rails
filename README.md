@@ -15,6 +15,8 @@ If you wish to use jQuery UI as well, you can add this line to `application.js`:
 
     //= require jquery-ui
 
+In order to use the themed parts of jQuery UI, you will also need to supply your own theme CSS. See [jqueryui.com](http://jqueryui.com) for more information.
+
 ### Installation
 
 When you generate a new Rails 3.1 app, pass the `-j jquery` option, like this:
