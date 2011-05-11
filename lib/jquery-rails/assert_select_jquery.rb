@@ -43,6 +43,8 @@ module ActionDispatch
       # end
 
       PATTERN_HTML  = "\"((\\\\\"|[^\"])*)\""
+      PATTERN_UNICODE_ESCAPED_CHAR = /\\u([0-9a-zA-Z]{4})/
+
       def assert_select_jquery(*args, &block)
         jquery_method = args.first.is_a?(Symbol) ? args.shift : nil
         jquery_opt    = args.first.is_a?(Symbol) ? args.shift : nil
@@ -75,6 +77,22 @@ module ActionDispatch
           end
         end
       end
+
+    private
+
+      # Unescapes a JS string.
+      def unescape_js(js_string)
+        # js encodes double quotes and line breaks.
+        unescaped= js_string.gsub('\"', '"')
+        unescaped.gsub!(/\\\//, '/')
+        unescaped.gsub!('\n', "\n")
+        unescaped.gsub!('\076', '>')
+        unescaped.gsub!('\074', '<')
+        # js encodes non-ascii characters.
+        unescaped.gsub!(PATTERN_UNICODE_ESCAPED_CHAR) {|u| [$1.hex].pack('U*')}
+        unescaped
+      end
+
     end
   end
 end
