@@ -82,6 +82,16 @@
       return event.result !== false;
     },
 
+    // Default confirm dialog, may be overridden with custom confirm dialog in $.rails.confirm
+    confirm: function(message) {
+      return confirm(message);
+    },
+
+    // Default ajax function, may be overridden with custom function in $.rails.ajax
+    ajax: function(options) {
+      return $.ajax(options);
+    },
+
     // Submits "remote" forms and links with ajax
     handleRemote: function(element) {
       var method, url, data,
@@ -105,7 +115,7 @@
           data = null;
         }
 
-        $.ajax({
+        rails.ajax({
           url: url, type: method || 'GET', data: data, dataType: dataType,
           // stopping the "ajax:beforeSend" event will cancel the ajax request
           beforeSend: function(xhr, settings) {
@@ -171,11 +181,27 @@
       });
     },
 
-    // If message provided in 'data-confirm' attribute, fires `confirm` event and returns result of confirm dialog.
-    // Attaching a handler to the element's `confirm` event that returns false cancels the confirm dialog.
+    /*
+	 For 'data-confirm' attribute:
+       - fires `confirm` event
+       - shows the confirmation dialog
+       - fires the `confirm:complete` event
+
+     Returns `true` if no function stops the chain and user chose yes; `false` otherwise.
+	 Attaching a handler to the element's `confirm` event that returns a `falsy` value cancels the confirmation dialog.
+	 Attaching a handler to the element's `confirm:complete` event that returns a `falsy` value makes this function
+	 return false.
+    */
     allowAction: function(element) {
-      var message = element.data('confirm');
-      return !message || (rails.fire(element, 'confirm') && confirm(message));
+      var message = element.data('confirm'),
+          answer = false, callback;
+      if (!message) { return true; }
+
+      if (rails.fire(element, 'confirm')) {
+        answer = rails.confirm(message);
+        callback = rails.fire(element, 'confirm:complete', [answer]);
+      }
+      return answer && callback;
     },
 
     // Helper function which checks for blank inputs in a form that match the specified CSS selector
