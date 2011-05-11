@@ -1,8 +1,16 @@
-## 0.3.0 (2 May 2011)
+## 1.0.1 (10 May 2011)
+
+  - Stop downloading rails.js from GitHub
+  - Vendor jQuery UI for those who want it
+  - Fix assert_select_jquery now that Rails 3.1 has no RJS at all
+  - Fix rails dependency to just be railties
+
+## 1.0.rc (3 May 2011)
 
   - Rails 3.1 asset pipeline edition
   - Removes generators and railties
   - Just provides jquery.js and jquery_ujs.js
+  - Still compatible with Rails 3.0 via the old generator code
 
 ## 0.2.7 (5 February 2011)
 
