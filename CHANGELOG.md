@@ -1,3 +1,7 @@
+## 1.0.2 (12 May 2011)
+
+  - Fix Rails 3.0 now that rails.js is named jquery_ujs.js
+
 ## 1.0.1 (10 May 2011)
 
   - Stop downloading rails.js from GitHub
