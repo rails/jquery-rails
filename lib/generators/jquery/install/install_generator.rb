@@ -33,6 +33,7 @@ module Jquery
 
       def copy_ujs_driver
         say_status("copying", "jQuery UJS adapter (#{@@jquery_ujs_version[0..5]})", :green)
+        remove_file "public/javascripts/rails.js"
         copy_file "jquery_ujs.js", "public/javascripts/jquery_ujs.js"
       end
 
