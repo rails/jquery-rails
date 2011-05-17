@@ -1,3 +1,8 @@
+## 1.0.5 (28 May 2011)
+
+  - Updated to latest jquery-ujs
+  - Remove old rails.js in Rails 3.0 generator
+
 ## 1.0.4 (17 May 2011)
 
   - Fix exception in Rails 3.0 generator
