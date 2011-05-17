@@ -8,7 +8,6 @@ module Jquery
       @@jquery_ujs_version = "a634e7507d45249731b79a801034097e330d27d1"
       desc "This generator installs jQuery #{@@jquery_version}, jQuery-ujs, and (optionally) jQuery UI #{@@jquery_ui_version}"
       class_option :ui, :type => :boolean, :default => false, :desc => "Include jQueryUI"
-      class_option :version, :type => :string, :default => @@jquery_version, :desc => "Which version of jQuery to fetch"
       source_root File.expand_path('../../../../../vendor/assets/javascripts', __FILE__)
 
       def remove_prototype
