@@ -1,3 +1,8 @@
+## 1.0.3 (17 May 2011)
+
+  - Update to jQuery 1.6.1
+  - Remove useless --version generator option
+
 ## 1.0.2 (12 May 2011)
 
   - Fix Rails 3.0 now that rails.js is named jquery_ujs.js
