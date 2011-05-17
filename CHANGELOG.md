@@ -1,3 +1,7 @@
+## 1.0.4 (17 May 2011)
+
+  - Fix exception in Rails 3.0 generator
+
 ## 1.0.3 (17 May 2011)
 
   - Update to jQuery 1.6.1
