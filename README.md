@@ -39,6 +39,6 @@ In your Gemfile, add this line:
 
 Then, run `bundle install`. To invoke the generator, run:
 
-    rails generate jquery:install #--ui to enable jQuery UI --version to install specific version of JQuery (default is 1.6)
+    rails generate jquery:install #--ui to enable jQuery UI
 
 You're done!
