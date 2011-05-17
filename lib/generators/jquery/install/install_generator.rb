@@ -3,12 +3,13 @@ require 'rails'
 module Jquery
   module Generators
     class InstallGenerator < ::Rails::Generators::Base
-      @@jquery_version = "1.6"
-      @@jquery_ui_version = "1.8.12"
-      @@jquery_ujs_version = "a634e7507d45249731b79a801034097e330d27d1"
       desc "This generator installs jQuery #{@@jquery_version}, jQuery-ujs, and (optionally) jQuery UI #{@@jquery_ui_version}"
       class_option :ui, :type => :boolean, :default => false, :desc => "Include jQueryUI"
       source_root File.expand_path('../../../../../vendor/assets/javascripts', __FILE__)
+
+      @@jquery_version     = "1.6.1"
+      @@jquery_ui_version  = "1.8.12"
+      @@jquery_ujs_version = "a634e7507d45249731b79a801034097e330d27d1"
 
       def remove_prototype
         PROTOTYPE_JS.each do |name|
