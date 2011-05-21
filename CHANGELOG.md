@@ -1,4 +1,8 @@
-## 1.0.5 (28 May 2011)
+## 1.0.6 (21 May 2011)
+
+  - Updated to latest jquery-ujs with `data-params` support
+
+## 1.0.5 (17 May 2011)
 
   - Updated to latest jquery-ujs
   - Remove old rails.js in Rails 3.0 generator
