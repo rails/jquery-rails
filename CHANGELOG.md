@@ -1,3 +1,7 @@
+## 1.0.7 (21 May 2011)
+
+  - Fix assert_select_jquery's bad call to unescape_rjs
+
 ## 1.0.6 (21 May 2011)
 
   - Updated to latest jquery-ujs with `data-params` support
