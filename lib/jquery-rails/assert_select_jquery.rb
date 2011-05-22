@@ -57,7 +57,7 @@ module ActionDispatch
 
         fragments = []
         response.body.scan(Regexp.new(pattern)).each do |match|
-          doc = HTML::Document.new(unescape_rjs(match.first))
+          doc = HTML::Document.new(unescape_js(match.first))
           doc.root.children.each do |child|
             fragments.push child if child.tag?
           end
