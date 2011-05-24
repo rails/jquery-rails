@@ -19,11 +19,11 @@ In order to use the themed parts of jQuery UI, you will also need to supply your
 
 ### Installation
 
-When you generate a new Rails 3.1 app, pass the `-j jquery` option, like this:
+New Rails 3.1 apps include jquery-rails in the Gemfile by default. So just make a new app:
 
-    rails new myapp -j jquery
+    rails new myapp
 
-Then run `bundle install`. You're done!
+You're done!
 
 ## Rails 3.0
 
