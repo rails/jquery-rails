@@ -1,10 +1,10 @@
-# Configure Rails 3.1 to have assert_select_jquery
+# Configure Rails 3.1 to have assert_select_jquery() in tests
 module Jquery
   module Rails
 
     class Engine < ::Rails::Engine
       config.before_configuration do
-        require "jquery-rails/assert_select_jquery" if ::Rails.env.test?
+        require "jquery/assert_select" if ::Rails.env.test?
       end
     end
 
