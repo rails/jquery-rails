@@ -1,3 +1,7 @@
+## 1.0.9 (25 May 2011)
+
+  - Merged with new rails repo (3.1 fix)
+
 ## 1.0.8 (25 May 2011)
 
   - Updated to latest jquery-ujs with `[disabled][required]` fix
