@@ -12,7 +12,7 @@ module Jquery
       source_root File.expand_path('../../../../../vendor/assets/javascripts', __FILE__)
 
       def remove_prototype
-        PROTOTYPE_JS.each do |name|
+        Rails::PROTOTYPE_JS.each do |name|
           remove_file "public/javascripts/#{name}.js"
         end
       end
