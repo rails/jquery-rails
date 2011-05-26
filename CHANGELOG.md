@@ -1,3 +1,7 @@
+## 1.0.8 (25 May 2011)
+
+  - Updated to latest jquery-ujs with `[disabled][required]` fix
+
 ## 1.0.7 (21 May 2011)
 
   - Fix assert_select_jquery's bad call to unescape_rjs
