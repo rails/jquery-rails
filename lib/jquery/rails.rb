@@ -7,5 +7,6 @@ module Jquery
     else
       require 'jquery/rails/engine'
     end
+    require 'jquery/rails/version'
   end
 end
