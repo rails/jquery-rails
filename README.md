@@ -45,6 +45,6 @@ You're done!
 
 ### Support for different Versions of Jquery / Jquery-UI
 
-   rails generate jquery:install --jquery_version=1.6.1 --jquery_ui_version=1.8.12
+    rails generate jquery:install --jquery_version=1.6.1 --jquery_ui_version=1.8.12
 
 Currently only Jquery 1.6.1 and Ui 1.8.12 are shipped with the gem.
