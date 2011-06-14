@@ -1,3 +1,7 @@
+## 1.0.10 (13 June 2011)
+
+  - Updated to latest jqueyr-ujs with bug fixes
+
 ## 1.0.9 (25 May 2011)
 
   - Merged with new rails repo (3.1 fix)
