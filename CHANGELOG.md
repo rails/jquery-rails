@@ -1,3 +1,9 @@
+## 1.0.11 (15 June 2011)
+
+  - Updated to latest jqueyr-ujs with cross-domain support
+
+[See jquery-ujs issue 167](https://github.com/rails/jquery-ujs/pull/167) for relevant discussion
+
 ## 1.0.10 (13 June 2011)
 
   - Updated to latest jqueyr-ujs with bug fixes
