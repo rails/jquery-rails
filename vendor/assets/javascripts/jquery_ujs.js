@@ -51,6 +51,9 @@
     // Link elements bound by jquery-ujs
     linkClickSelector: 'a[data-confirm], a[data-method], a[data-remote]',
 
+		// Select elements bound by jquery-ujs
+		selectChangeSelector: 'select[data-remote]',
+
     // Form elements bound by jquery-ujs
     formSubmitSelector: 'form',
 
@@ -110,14 +113,19 @@
             data.push(button);
             element.data('ujs:submit-button', null);
           }
-        } else {
+        } else if (element.is('select')) {
           method = element.data('method');
-          url = element.attr('href');
-          data = element.data('params') || null; 
-       }
+          url = element.data('url');
+					data = element.serialize();
+					if (element.data('params')) data = data + "&" + element.data('params'); 
+        } else {
+           method = element.data('method');
+           url = element.attr('href');
+           data = element.data('params') || null; 
+        }
 
-        rails.ajax({
-          url: url, type: method || 'GET', data: data, dataType: dataType, crossDomain: crossDomain,
+        options = {
+          type: method || 'GET', data: data, dataType: dataType, crossDomain: crossDomain,
           // stopping the "ajax:beforeSend" event will cancel the ajax request
           beforeSend: function(xhr, settings) {
             if (settings.dataType === undefined) {
@@ -134,7 +142,11 @@
           error: function(xhr, status, error) {
             element.trigger('ajax:error', [xhr, status, error]);
           }
-        });
+        };
+        // Do not pass url to `ajax` options if blank
+        if (url) { $.extend(options, { url: url }); }
+
+        rails.ajax(options);
       }
     },
 
@@ -262,6 +274,14 @@
       return false;
     }
   });
+
+	$(rails.selectChangeSelector).live('change.rails', function(e) {
+    var link = $(this);
+    if (!rails.allowAction(link)) return rails.stopEverything(e);
+
+    rails.handleRemote(link);
+    return false;
+  });	
 
   $(rails.formSubmitSelector).live('submit.rails', function(e) {
     var form = $(this),
