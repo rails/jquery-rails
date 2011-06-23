@@ -1,3 +1,8 @@
+## 1.0.12 (23 June 2011)
+
+  - Updated to latest jqueyr-ujs with 'blank form action' and
+    data-remote support for select elements
+
 ## 1.0.11 (15 June 2011)
 
   - Updated to latest jqueyr-ujs with cross-domain support
