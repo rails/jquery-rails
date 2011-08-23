@@ -52,7 +52,7 @@ module ActionDispatch
 
         pattern = "\\.#{jquery_method || '\\w+'}\\("
         pattern = "#{pattern}['\"]#{jquery_opt}['\"],?\\s*" if jquery_opt
-        pattern = "#{pattern}#{PATTERN_HTML}" if block
+        pattern = "#{pattern}#{PATTERN_HTML}"
         pattern = "(?:jQuery|\\$)\\(['\"]#{id}['\"]\\)#{pattern}" if id
 
         fragments = []
