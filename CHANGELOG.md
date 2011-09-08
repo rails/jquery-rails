@@ -1,3 +1,11 @@
+## 1.0.14 (08 September 2011)
+
+  - Updated to latest jquery-ujs
+    - Added `disable-with` support for links
+    - minor bug fixes
+    - Added `data-remote` support for change events of all input types
+  - Added install generator for Rails 3.1 with instructional message
+
 ## 1.0.13 (11 August 2011)
 
   - Updated to latest jquery-ujs with `novalidate` support
