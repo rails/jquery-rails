@@ -133,7 +133,7 @@
           // stopping the "ajax:beforeSend" event will cancel the ajax request
           beforeSend: function(xhr, settings) {
             if (settings.dataType === undefined) {
-              xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts._default);
+              xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.*);
             }
             return rails.fire(element, 'ajax:beforeSend', [xhr, settings]);
           },
