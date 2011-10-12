@@ -58,7 +58,7 @@
     formSubmitSelector: 'form',
 
     // Form input elements bound by jquery-ujs
-    formInputClickSelector: 'form input[type=submit], form input[type=image], form button[type=submit], form button:not([type])',
+    formInputClickSelector: 'form input[type=submit], form input[type=image], form button[type=submit], form button:not(button[type])',
 
     // Form input elements disabled during form submission
     disableSelector: 'input[data-disable-with], button[data-disable-with], textarea[data-disable-with]',
@@ -159,6 +159,7 @@
     handleMethod: function(link) {
       var href = link.attr('href'),
         method = link.data('method'),
+        target = link.attr('target'),
         csrf_token = $('meta[name=csrf-token]').attr('content'),
         csrf_param = $('meta[name=csrf-param]').attr('content'),
         form = $('<form method="post" action="' + href + '"></form>'),
@@ -168,6 +169,8 @@
         metadata_input += '<input name="' + csrf_param + '" value="' + csrf_token + '" type="hidden" />';
       }
 
+      if (target) { form.attr('target', target); }
+
       form.hide().append(metadata_input).appendTo('body');
       form.submit();
     },
@@ -175,26 +178,26 @@
     /* Disables form elements:
       - Caches element value in 'ujs:enable-with' data store
       - Replaces element text with value of 'data-disable-with' attribute
-      - Adds disabled=disabled attribute
+      - Sets disabled property to true
     */
     disableFormElements: function(form) {
       form.find(rails.disableSelector).each(function() {
         var element = $(this), method = element.is('button') ? 'html' : 'val';
         element.data('ujs:enable-with', element[method]());
         element[method](element.data('disable-with'));
-        element.attr('disabled', 'disabled');
+        element.prop('disabled', true);
       });
     },
 
     /* Re-enables disabled form elements:
       - Replaces element text with cached value from 'ujs:enable-with' data store (created in `disableFormElements`)
-      - Removes disabled attribute
+      - Sets disabled property to false
     */
     enableFormElements: function(form) {
       form.find(rails.enableSelector).each(function() {
         var element = $(this), method = element.is('button') ? 'html' : 'val';
         if (element.data('ujs:enable-with')) element[method](element.data('ujs:enable-with'));
-        element.removeAttr('disabled');
+        element.prop('disabled', false);
       });
     },
 
@@ -288,12 +291,13 @@
   });
 
   $(rails.linkClickSelector).live('click.rails', function(e) {
-    var link = $(this);
+    var link = $(this), method = link.data('method'), data = link.data('params');
     if (!rails.allowAction(link)) return rails.stopEverything(e);
 
     if (link.is(rails.linkDisableSelector)) rails.disableElement(link);
 
     if (link.data('remote') !== undefined) {
+      if ( (e.metaKey || e.ctrlKey) && (!method || method === 'GET') && !data ) { return true; }
       rails.handleRemote(link);
       return false;
     } else if (link.data('method')) {
