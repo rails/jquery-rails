@@ -1,3 +1,11 @@
+## 1.0.15 (12 October 2011)
+
+  - Updated to latest jquery-ujs
+    - Fixed formInputClickSelector `button[type]` for IE7
+    - Copy target attribute to generated form for `a[data-method]` links
+    - Return true (abort ajax) for ctrl- and meta-clicks on remote links
+    - Use jQuery `.prop()` for disabling/enabling elements
+
 ## 1.0.14 (08 September 2011)
 
   - Updated to latest jquery-ujs
