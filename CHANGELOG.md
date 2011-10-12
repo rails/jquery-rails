@@ -1,3 +1,8 @@
+## 1.0.16 (12 October 2011)
+
+  - Updated to jQuery 1.6.4
+  - Updated to jQuery UI 1.8.16
+
 ## 1.0.15 (12 October 2011)
 
   - Updated to latest jquery-ujs
