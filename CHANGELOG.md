@@ -1,3 +1,10 @@
+## 1.0.17 (9 November 2011)
+
+  - Updated to jQuery 1.7
+  - Updated to latest jquery-ujs
+    - Moved file comment above function so it won't be included in
+      compressed version
+
 ## 1.0.16 (12 October 2011)
 
   - Updated to jQuery 1.6.4
