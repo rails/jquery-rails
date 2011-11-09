@@ -1,12 +1,17 @@
-# Jquery-rails
+# jquery-rails
 
 jQuery! For Rails! So great.
 
-Also provided is Sam Ruby's assert_select_jquery function, which is automatically included for use in tests.
+This gem provides:
+
+* jQuery 1.6
+* jQuery UI 1.8.16
+* the latest jQuery UJS adapter
+* and Sam Ruby's assert_select_jquery function, which is automatically included for use in tests.
 
 ## Rails 3.1
 
-This gem vendors jQuery 1.6 and the latest jQuery UJS adapter for Rails 3.1 and greater. The files will be added to the asset pipeline and available for you to use. These two lines will be added to the file `app/assets/javascripts/application.js` by default:
+For Rails 3.1 and greater, the files will be added to the asset pipeline and available for you to use. These two lines will be added to the file `app/assets/javascripts/application.js` by default:
 
     //= require jquery
     //= require jquery_ujs
