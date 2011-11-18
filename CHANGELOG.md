@@ -1,3 +1,10 @@
+## 1.0.18 (18 November 2011)
+
+  - Updated to latest jquery-ujs
+    - Fixed event parameter for form submit event handlers in IE for
+      jQuery 1.6.x
+    - Fixed form submit event handlers for jQuery 1.7
+
 ## 1.0.17 (9 November 2011)
 
   - Updated to jQuery 1.7
