@@ -1,3 +1,7 @@
+## 1.0.19 (22 November 2011)
+
+  - Updated to jQuery 1.7.1
+
 ## 1.0.18 (18 November 2011)
 
   - Updated to latest jquery-ujs
