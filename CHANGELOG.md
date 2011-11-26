@@ -1,3 +1,11 @@
+## 1.0.19 (26 November 2011)
+
+  - Updated to jQuery 1.7.1
+  - Updated to latest jquery-ujs
+    - Fixed disabled links to re-enable when `ajax:before` or
+      `ajax:beforeSend` are canceled
+    - Switched from deprecated `live` to `delegate`
+
 ## 1.0.18 (18 November 2011)
 
   - Updated to latest jquery-ujs
