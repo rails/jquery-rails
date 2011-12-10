@@ -129,6 +129,12 @@
           data = element.data('params') || null;
         }
 
+        // Since IE will send a DELETE/PUT to the redirected URL
+        if(method && method.toLowerCase() !== 'get'){
+          data = data + "&" + "_method=" + method;
+          method = 'POST';
+        }
+
         options = {
           type: method || 'GET', data: data, dataType: dataType, crossDomain: crossDomain,
           // stopping the "ajax:beforeSend" event will cancel the ajax request
@@ -270,7 +276,7 @@
       element.data('ujs:enable-with', element.html()); // store enabled state
       element.html(element.data('disable-with')); // set to disabled state
       element.bind('click.railsDisable', function(e) { // prevent further clicking
-        return rails.stopEverything(e)
+        return rails.stopEverything(e);
       });
     },
 
