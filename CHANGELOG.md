@@ -1,3 +1,11 @@
+## 2.0.1 (28 February 2012)
+
+  - Fixed Rails 3.2 dependency issue
+
+## 2.0 (20 December 2011)
+
+  - Minimum dependency set to Rails 3.2
+
 ## 1.0.19 (26 November 2011)
 
   - Updated to jQuery 1.7.1
