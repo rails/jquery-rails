@@ -18,6 +18,6 @@ Gem::Specification.new do |s|
   s.add_dependency "thor",     "~> 0.14"
 
   s.files        = `git ls-files`.split("\n")
-  s.executables  = `git ls-files`.split("\n").select{|f| f =~ /^bin/}
+  s.executables  = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.require_path = 'lib'
 end
