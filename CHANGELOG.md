@@ -1,3 +1,11 @@
+## 2.0.2 (03 April 2012)
+
+  - Updated to jQuery 1.7.2
+  - Updated to jQuery UI 1.8.18
+  - Updated to latest jquery-ujs
+    - Override provided for obtaining `href`
+    - Edit `crossDomain` and `dataType` from `ajax:before` event
+
 ## 2.0.1 (28 February 2012)
 
   - Fixed Rails 3.2 dependency issue
