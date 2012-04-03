@@ -99,14 +99,18 @@
       return $.ajax(options);
     },
 
+    // Default way to get an element's href. May be overridden at $.rails.href.
+    href: function(element) {
+      return element.attr('href');
+    },
+
     // Submits "remote" forms and links with ajax
     handleRemote: function(element) {
-      var method, url, data,
-        crossDomain = element.data('cross-domain') || null,
-        dataType = element.data('type') || ($.ajaxSettings && $.ajaxSettings.dataType),
-        options;
+      var method, url, data, crossDomain, dataType, options;
 
       if (rails.fire(element, 'ajax:before')) {
+        crossDomain = element.data('cross-domain') || null;
+        dataType = element.data('type') || ($.ajaxSettings && $.ajaxSettings.dataType);
 
         if (element.is('form')) {
           method = element.attr('method');
@@ -125,7 +129,7 @@
           if (element.data('params')) data = data + "&" + element.data('params');
         } else {
           method = element.data('method');
-          url = element.attr('href');
+          url = rails.href(element);
           data = element.data('params') || null;
         }
 
@@ -160,7 +164,7 @@
     // Handles "data-method" on links such as:
     // <a href="/users/5" data-method="delete" rel="nofollow" data-confirm="Are you sure?">Delete</a>
     handleMethod: function(link) {
-      var href = link.attr('href'),
+      var href = rails.href(link),
         method = link.data('method'),
         target = link.attr('target'),
         csrf_token = $('meta[name=csrf-token]').attr('content'),
