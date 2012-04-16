@@ -16,7 +16,7 @@ For Rails 3.1 and greater, the files will be added to the asset pipeline and ava
     //= require jquery
     //= require jquery_ujs
 
-If you wish to use jQuery UI as well, you can add this line to `application.js`:
+For jQuery UI, we recommend the newer [jquery-ui-rails](https://github.com/joliss/jquery-ui-rails) gem. The jquery-rails gem still packages jQuery UI for compatibility. To use it, add the following line to your `application.js`:
 
     //= require jquery-ui
 
