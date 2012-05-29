@@ -4,10 +4,10 @@ jQuery! For Rails! So great.
 
 This gem provides:
 
-* jQuery 1.7.2
-* jQuery UI 1.8.18 (javascript only)
-* the latest jQuery UJS adapter
-* and Sam Ruby's assert_select_jquery function, which is automatically included for use in tests.
+  * jQuery 1.7.2
+  * jQuery UI 1.8.18 (javascript only)
+  * the jQuery UJS adapter
+  * assert_select_jquery to test jQuery responses in Ruby tests
 
 ## Installation
 
@@ -60,15 +60,14 @@ You're done!
 
 ## Contributing
 
-Feel free to open an issue ticket if you find something that could be
-improved. A couple notes:
+Feel free to open an issue ticket if you find something that could be improved. A couple notes:
 
-* If it's an issue pertaining to the jquery-ujs
-javascript, please report it to the [jquery-ujs
-project](https://github.com/rails/jquery-ujs).
+* If it's an issue pertaining to the jquery-ujs javascript, please report it to the [jquery-ujs project](https://github.com/rails/jquery-ujs).
 
-* If the jquery or jquery-ui scripts are outdated (i.e. maybe a new
-version of jquery was released yesterday), feel free to open an issue
-and prod us to get that thing updated. However, for security reasons, we
-won't be accepting pull requests with updated jquery or jquery-ui
-scripts.
+* If the jquery or jquery-ui scripts are outdated (i.e. maybe a new version of jquery was released yesterday), feel free to open an issue and prod us to get that thing updated. However, for security reasons, we won't be accepting pull requests with updated jquery or jquery-ui scripts.
+
+## Acknowledgements
+
+Many thanks are due to all of [the jquery-rails contributors](https://github.com/rails/jquery-rails/graphs/contributors). Special thanks to [JangoSteve](http://github.com/JangoSteve) for tirelessly answering questions and accepting patches, and the [Rails Core Team](https://github.com/organizations/rails/teams/617) for making jquery-rails an official part of Rails 3.1.
+
+Copyright [André Arko](http://arko.net), released under the MIT License.
