@@ -1,3 +1,10 @@
+## 2.1.0 (16 August 2012)
+
+  - Updated to latest jquery-ujs
+    - jQuery 1.8.0 compatibility
+  - Updated to jQuery 1.8.0
+  - Updated to jQuery UI 1.8.23
+
 ## 2.0.3 (16 August 2012)
 
   - Updated to latest jquery-ujs
