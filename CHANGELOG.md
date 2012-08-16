@@ -1,3 +1,10 @@
+## 2.0.3 (16 August 2012)
+
+  - Updated to latest jquery-ujs
+    - created `rails:attachBindings` to allow for customization of $.rails object settings
+    - created `ajax:send` event to provide access to jqXHR object from ajax requests
+    - added support for `data-with-credentials`
+
 ## 2.0.2 (03 April 2012)
 
   - Updated to jQuery 1.7.2
