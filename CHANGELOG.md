@@ -1,3 +1,8 @@
+## 2.1.1 (18 August 2012)
+
+  - Updated to latest jquery-ujs
+    - ajax:aborted:file bugfixes
+
 ## 2.1.0 (16 August 2012)
 
   - Updated to latest jquery-ujs
