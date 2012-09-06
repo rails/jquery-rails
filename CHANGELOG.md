@@ -1,3 +1,9 @@
+## 2.1.2 (06 September 2012)
+
+  - Updated to latest jquery-ujs
+    - required radio bugfix
+  - Updated to jQuery 1.8.1
+
 ## 2.1.1 (18 August 2012)
 
   - Updated to latest jquery-ujs
