@@ -9,6 +9,17 @@ This gem provides:
   * the jQuery UJS adapter
   * assert_select_jquery to test jQuery responses in Ruby tests
 
+## Versions
+
+Starting with v2.1, the jquery-rails gem follows these version guidelines
+to provide more control over your app's jquery version from your Gemfile:
+
+```
+patch version bump = updates to jquery-ujs, jquery-rails, and patch-level updates to jquery
+minor version bump = minor-level updates to jquery
+major version bump = major-level updates to jquery and updates to rails which may be backwards-incompatible
+```
+
 ## Installation
 
 Apps generated with Rails 3.1 or later include jquery-rails in the Gemfile by default. So just make a new app:
