@@ -1,4 +1,5 @@
-require 'jquery/rails/engine'
+require 'jquery/assert_select' if ::Rails.env.test?
+require 'jquery/rails/railtie'
 require 'jquery/rails/version'
 
 module Jquery

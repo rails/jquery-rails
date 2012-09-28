@@ -59,7 +59,7 @@ In order to use the themed parts of jQuery UI, you will also need to supply [you
 
 This gem adds a single generator: `jquery:install`. Running the generator will remove any Prototype JS files you may happen to have, and copy jQuery and the jQuery-ujs driver for Rails (and optionally, jQuery UI) to the `public/javascripts` directory.
 
-This gem will also hook into the Rails configuration process, removing Prototype and adding jQuery to the javascript files included by the `javascript_include_tag(:defaults)` call. While this gem contains the minified and un-minified versions of jQuery and jQuery UI, only the minified versions are included in `:defaults`.
+This gem will also hook into the Rails configuration process, removing Prototype and adding jQuery to the javascript files included by the `javascript_include_tag(:defaults)` call. While this gem contains the minified and un-minified versions of jQuery and jQuery UI, only the minified versions will be included in the `:defaults` when Rails is run in `production` or `test` mode  (un-minified versions will be included when Rails is run in `development` mode).
 
 To invoke the generator, run:
 
