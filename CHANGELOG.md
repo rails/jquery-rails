@@ -22,6 +22,7 @@
     - created `rails:attachBindings` to allow for customization of $.rails object settings
     - created `ajax:send` event to provide access to jqXHR object from ajax requests
     - added support for `data-with-credentials`
+  - Lowered minimum rails dependency to Rails 3.1
 
 ## 2.0.2 (03 April 2012)
 
