@@ -323,11 +323,11 @@
 
     $.ajaxPrefilter(function(options, originalOptions, xhr){ if ( !options.crossDomain ) { rails.CSRFProtection(xhr); }});
 
-    $(document).delegate(rails.linkDisableSelector, 'ajax:complete', function() {
+    $(document).on('ajax:complete', rails.linkDisableSelector, function() {
         rails.enableElement($(this));
     });
 
-    $(document).delegate(rails.linkClickSelector, 'click.rails', function(e) {
+    $(document).on('click.rails', rails.linkClickSelector, function(e) {
       var link = $(this), method = link.data('method'), data = link.data('params');
       if (!rails.allowAction(link)) return rails.stopEverything(e);
 
@@ -351,7 +351,7 @@
       }
     });
 
-    $(document).delegate(rails.inputChangeSelector, 'change.rails', function(e) {
+    $(document).on('change.rails', rails.inputChangeSelector, function(e) {
       var link = $(this);
       if (!rails.allowAction(link)) return rails.stopEverything(e);
 
@@ -359,7 +359,7 @@
       return false;
     });
 
-    $(document).delegate(rails.formSubmitSelector, 'submit.rails', function(e) {
+    $(document).on('submit.rails', rails.formSubmitSelector, function(e) {
       var form = $(this),
         remote = form.data('remote') !== undefined,
         blankRequiredInputs = rails.blankInputs(form, rails.requiredInputSelector),
@@ -398,7 +398,7 @@
       }
     });
 
-    $(document).delegate(rails.formInputClickSelector, 'click.rails', function(event) {
+    $(document).on('click.rails', rails.formInputClickSelector, function(event) {
       var button = $(this);
 
       if (!rails.allowAction(button)) return rails.stopEverything(event);
@@ -410,11 +410,11 @@
       button.closest('form').data('ujs:submit-button', data);
     });
 
-    $(document).delegate(rails.formSubmitSelector, 'ajax:beforeSend.rails', function(event) {
+    $(document).on('ajax:beforeSend.rails', rails.formSubmitSelector, function(event) {
       if (this == event.target) rails.disableFormElements($(this));
     });
 
-    $(document).delegate(rails.formSubmitSelector, 'ajax:complete.rails', function(event) {
+    $(document).on('ajax:complete.rails', rails.formSubmitSelector, function(event) {
       if (this == event.target) rails.enableFormElements($(this));
     });
 
