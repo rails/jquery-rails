@@ -1,6 +1,7 @@
 ## 2.1.4 (unreleased)
 
   - Rails 4 compatibility
+  - Fixed compatibility for Rails 3.0 (or greater with asset pipeline *disabled*)
 
 ## 2.1.3 (24 September 2012)
 
