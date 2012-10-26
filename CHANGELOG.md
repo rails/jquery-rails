@@ -1,3 +1,16 @@
+## 2.2.0 (unreleased)
+
+  - Updated to latest jQueryUI 1.9.1
+
+## 2.1.4 (unreleased)
+
+  - Rails 4 compatibility
+
+## 2.1.3 (24 September 2012)
+
+  - Updated to latest jquery-ujs
+  - Updated to jQuery 1.8.2
+
 ## 2.1.2 (06 September 2012)
 
   - Updated to latest jquery-ujs

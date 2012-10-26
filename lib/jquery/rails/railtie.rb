@@ -15,9 +15,11 @@ module Jquery
 
         # Merge the jQuery scripts, remove the Prototype defaults and finally add 'jquery_ujs'
         # at the end, because load order is important
-        config.action_view.javascript_expansions[:defaults] -= PROTOTYPE_JS + ['rails']
-        config.action_view.javascript_expansions[:defaults] |= jq_defaults
-        config.action_view.javascript_expansions[:defaults] << 'jquery_ujs'
+        if config.action_view.javascript_expansions
+          config.action_view.javascript_expansions[:defaults] -= PROTOTYPE_JS + ['rails']
+          config.action_view.javascript_expansions[:defaults] |= jq_defaults
+          config.action_view.javascript_expansions[:defaults] << 'jquery_ujs'
+        end
       end
     end
 
