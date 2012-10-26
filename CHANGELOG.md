@@ -1,3 +1,7 @@
+## 2.2.0 (unreleased)
+
+  - Updated to latest jQueryUI 1.9.1
+
 ## 2.1.4 (unreleased)
 
   - Rails 4 compatibility
