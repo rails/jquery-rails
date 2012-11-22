@@ -1,7 +1,7 @@
 ## 2.1.4 (22 November 2012)
 
   - Rails 4 compatibility
-  - Updated to jQuery 1.8.4
+  - Updated to jQuery 1.8.3
 
 ## 2.1.3 (24 September 2012)
 
