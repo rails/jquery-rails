@@ -3,8 +3,8 @@
   - Updated to jQuery 1.8.3
   - Updated to jQuery UI 1.9.2
   - Rails 4 compatibility
+  - Rails 3.1 compatibility (without asset pipeline)
   - Rails 3.0 compatibility
-  - Rails 3.1 (without asset pipeline) compatibility
 
 ## 2.1.3 (24 September 2012)
 
