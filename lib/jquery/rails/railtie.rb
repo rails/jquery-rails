@@ -2,11 +2,9 @@
 # get the minified version of the scripts included into the layout in production.
 module Jquery
   module Rails
-
     class Railtie < ::Rails::Railtie
-      if config.action_view.javascript_expansions
-        config.before_configuration do
-
+      config.before_configuration do
+        if config.action_view.javascript_expansions
           if ::Rails.root.join("public/javascripts/jquery-ui.min.js").exist?
             jq_defaults = %w(jquery jquery-ui)
             jq_defaults.map!{|a| a + ".min" } if ::Rails.env.production? || ::Rails.env.test?
@@ -21,6 +19,5 @@ module Jquery
         end
       end
     end
-
   end
 end
