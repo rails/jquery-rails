@@ -1,3 +1,7 @@
+## 2.2.0 (16 January 2012)
+
+  - Updated to jQuery 1.9.0
+
 ## 2.1.4 (26 November 2012)
 
   - Updated to jQuery 1.8.3
