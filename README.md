@@ -5,6 +5,7 @@ jQuery! For Rails! So great.
 This gem provides:
 
   * jQuery 1.9.0
+  * jQuery Migrate 1.0.0
   * jQuery UI 1.9.2 (javascript only)
   * the jQuery UJS adapter
   * assert_select_jquery to test jQuery responses in Ruby tests
@@ -45,6 +46,12 @@ The jquery and jquery-ujs files will be added to the asset pipeline and availabl
 ```js
 //= require jquery
 //= require jquery_ujs
+```
+
+If you would like to include [jquery-migrate](https://github.com/jquery/jquery-migrate) to help migrate to jQuery 1.9+, you can add it in your `application.js` 
+
+```js
+//= require jquery-migrate
 ```
 
 For jQuery UI, we recommend the [jquery-ui-rails](https://github.com/joliss/jquery-ui-rails) gem, as it includes the jquery-ui css and allows easier customization. This gem still packages the jQuery UI javascript for compatibility. To use it, add the following line to your `application.js`:
