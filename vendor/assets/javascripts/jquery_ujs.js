@@ -153,7 +153,9 @@
             return element;
 
           var id = element.attr('id');
-          return id ? $('#' + id) : $(document);
+          var replacement = $('#' + id);
+          
+          return replacement.length == 0 ? $(document) : replacement; 
         }
 
         options = {
