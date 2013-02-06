@@ -48,12 +48,6 @@ The jquery and jquery-ujs files will be added to the asset pipeline and availabl
 //= require jquery_ujs
 ```
 
-If you would like to include [jquery-migrate](https://github.com/jquery/jquery-migrate) to help migrate to jQuery 1.9+, you can add it in your `application.js` 
-
-```js
-//= require jquery-migrate
-```
-
 For jQuery UI, we recommend the [jquery-ui-rails](https://github.com/joliss/jquery-ui-rails) gem, as it includes the jquery-ui css and allows easier customization. This gem still packages the jQuery UI javascript for compatibility. To use it, add the following line to your `application.js`:
 
 ```js
@@ -75,6 +69,28 @@ rails generate jquery:install #--ui to enable jQuery UI
 ```
 
 You're done!
+
+### jQuery Migrate
+
+jQuery 1.9 removed or modified several APIs. To avoid breaking your scripts, [jQuery Migrate](https://github.com/jquery/jquery-migrate) was introduced. It will bring back all of the behaviour of jQuery 1.8 and optionally log calls to those removed or modified APIs. For details, see the [jQuery Core 1.9 Upgrade Guide](http://jquery.com/upgrade-guide/1.9/).
+
+If you would like to include jQuery Migrate, you can add it in your `application.js` 
+
+```js
+//= require jquery-migrate.default-config
+//= require jquery-migrate
+```
+
+`jquery-migrate.default-config` will disable logging of warning messages to the console for Rails' `test` and `production` environments. If you would like to customize this behaviour, omit the require directive and add your own configuration script, for example:
+
+```js
+(function() {
+  var rails_env = "#{Rails.env}"; //.js.str extension required for this
+  if(rails_env == 'test' || rails_env == 'production') {
+    jQuery.migrateMute = true;
+  }
+})();
+```
 
 ## Contributing
 
