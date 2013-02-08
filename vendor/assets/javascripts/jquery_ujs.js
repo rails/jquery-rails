@@ -118,12 +118,17 @@
     // Submits "remote" forms and links with ajax
     handleRemote: function(element) {
       var method, url, data, elCrossDomain, crossDomain, withCredentials, dataType, options;
+      var xhrFields = {};
 
       if (rails.fire(element, 'ajax:before')) {
         elCrossDomain = element.data('cross-domain');
         crossDomain = elCrossDomain === undefined ? null : elCrossDomain;
-        withCredentials = element.data('with-credentials') || null;
         dataType = element.data('type') || ($.ajaxSettings && $.ajaxSettings.dataType);
+        withCredentials = element.data('with-credentials') || null;
+
+        if (withCredentials) {
+          xhrFields["withCredentials"] = withCredentials;
+        }
 
         if (element.is('form')) {
           method = element.attr('method');
@@ -164,9 +169,7 @@
           error: function(xhr, status, error) {
             element.trigger('ajax:error', [xhr, status, error]);
           },
-          xhrFields: {
-            withCredentials: withCredentials
-          },
+          xhrFields: xhrFields,
           crossDomain: crossDomain
         };
         // Only pass url to `ajax` options if not blank
