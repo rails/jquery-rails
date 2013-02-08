@@ -151,6 +151,18 @@
           data = element.data('params') || null;
         }
 
+        var preferred_event_target = function() {
+          var element_is_attached = element.parents().last().parent().get(0) == document;
+
+          if (element_is_attached)
+            return element;
+
+          var id = element.attr('id');
+          var replacement = $('#' + id);
+          
+          return replacement.length == 0 ? $(document) : replacement; 
+        }
+
         options = {
           type: method || 'GET', data: data, dataType: dataType,
           // stopping the "ajax:beforeSend" event will cancel the ajax request
@@ -161,13 +173,13 @@
             return rails.fire(element, 'ajax:beforeSend', [xhr, settings]);
           },
           success: function(data, status, xhr) {
-            element.trigger('ajax:success', [data, status, xhr]);
+            preferred_event_target().trigger('ajax:success', [data, status, xhr]);
           },
           complete: function(xhr, status) {
-            element.trigger('ajax:complete', [xhr, status]);
+            preferred_event_target().trigger('ajax:complete', [xhr, status]);
           },
           error: function(xhr, status, error) {
-            element.trigger('ajax:error', [xhr, status, error]);
+            preferred_event_target().trigger('ajax:error', [xhr, status, error]);
           },
           xhrFields: xhrFields,
           crossDomain: crossDomain
