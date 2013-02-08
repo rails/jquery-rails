@@ -5,6 +5,7 @@ jQuery! For Rails! So great.
 This gem provides:
 
   * jQuery 1.9.0
+  * jQuery Migrate 1.1.0
   * jQuery UI 1.9.2 (javascript only)
   * the jQuery UJS adapter
   * assert_select_jquery to test jQuery responses in Ruby tests
@@ -68,6 +69,28 @@ rails generate jquery:install #--ui to enable jQuery UI
 ```
 
 You're done!
+
+### jQuery Migrate
+
+jQuery 1.9 removed or modified several APIs. To avoid breaking your scripts, [jQuery Migrate](https://github.com/jquery/jquery-migrate) was introduced. It will bring back all of the behaviour of jQuery 1.8 and optionally log calls to those removed or modified APIs. For details, see the [jQuery Core 1.9 Upgrade Guide](http://jquery.com/upgrade-guide/1.9/).
+
+If you would like to include jQuery Migrate, you can add it in your `application.js` 
+
+```js
+//= require jquery-migrate.default-config
+//= require jquery-migrate
+```
+
+`jquery-migrate.default-config` will disable logging of warning messages to the console for Rails' `test` and `production` environments. If you would like to customize this behaviour, omit the require directive and add your own configuration script, for example:
+
+```js
+(function() {
+  var rails_env = "#{Rails.env}"; //.js.str extension required for this
+  if(rails_env == 'test' || rails_env == 'production') {
+    jQuery.migrateMute = true;
+  }
+})();
+```
 
 ## Contributing
 
