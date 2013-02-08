@@ -1,6 +1,5 @@
 (function() {
-  var rails_env = "#{Rails.env}";
-  if(rails_env == 'test' || rails_env == 'production') {
+  if("#{Rails.env}" !== 'development') {
     jQuery.migrateMute = true;
   }
 })();
