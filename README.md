@@ -20,6 +20,9 @@ minor version bump = minor-level updates to jquery
 major version bump = major-level updates to jquery and updates to rails which may be backwards-incompatible
 ```
 
+See CHANGELOG.md to see which versions of jquery-rails bundle which
+versions of jQuery.
+
 ## Installation
 
 Apps generated with Rails 3.1 or later include jquery-rails in the Gemfile by default. So just make a new app:
