@@ -1,7 +1,7 @@
 require 'rails'
 
 # Supply generator for Rails 3.0.x or if asset pipeline is not enabled
-if ::Rails.version < "3.1" || !::Rails.application.config.assets.enabled
+if ::Rails.version.to_s < "3.1" || !::Rails.application.config.assets.enabled
   module Jquery
     module Generators
       class InstallGenerator < ::Rails::Generators::Base
