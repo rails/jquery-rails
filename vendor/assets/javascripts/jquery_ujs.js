@@ -291,7 +291,7 @@
 
   };
 
-  $.ajaxPrefilter(function(options, originalOptions, xhr){ if ( !options.crossDomain ) { rails.CSRFProtection(xhr); }});
+  $.ajaxPrefilter(function(options, originalOptions, xhr){ if ( !options.crossDomain && options.type !== 'GET' ) { rails.CSRFProtection(xhr); }});
 
   $(document).delegate(rails.linkDisableSelector, 'ajax:complete', function() {
       rails.enableElement($(this));
