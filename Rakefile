@@ -18,5 +18,4 @@ task :guard_version do
   end
 
   check_version('jquery.js', /jQuery JavaScript Library v([\S]+)/, 'JQUERY_VERSION')
-  check_version('jquery-ui.js', /jQuery UI - v([\S]+)/, 'JQUERY_UI_VERSION')
 end
