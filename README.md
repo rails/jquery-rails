@@ -50,13 +50,10 @@ The jquery and jquery-ujs files will be added to the asset pipeline and availabl
 //= require jquery_ujs
 ```
 
-For jQuery UI, we recommend the [jquery-ui-rails](https://github.com/joliss/jquery-ui-rails) gem, as it includes the jquery-ui css and allows easier customization. This gem still packages the jQuery UI javascript for compatibility. To use it, add the following line to your `application.js`:
+For jQuery UI, we recommend the [jquery-ui-rails](https://github.com/joliss/jquery-ui-rails) gem, as it includes the jquery-ui css and allows easier customization.
 
-```js
-//= require jquery-ui
-```
-
-In order to use the themed parts of jQuery UI, you will also need to supply [your own theme CSS](http://jqueryui.com) (or use the jquery-ui-rails gem mentioned above).
+*As of v3.0, jquery-rails no longer includes jQuery UI. Use the
+jquery-ui-rails gem above.*
 
 ### Rails 3.0 (or greater with asset pipeline *disabled*)
 
