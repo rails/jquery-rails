@@ -212,11 +212,11 @@
       return false. The `confirm:complete` event is fired whether or not the user answered true or false to the dialog.
    */
     allowAction: function(element) {
-      var message = element.data('confirm'),
-          answer = false, callback;
-      if (!message) { return true; }
+      var message, answer = false, callback;
 
       if (rails.fire(element, 'confirm')) {
+        message = element.data('confirm');
+        if (!message) { return true; }
         answer = rails.confirm(message);
         callback = rails.fire(element, 'confirm:complete', [answer]);
       }
