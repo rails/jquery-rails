@@ -8,8 +8,8 @@ If the jquery or jquery-ui scripts are outdated (i.e. maybe a new version of jqu
 
 ## Changes to jquery_ujs.js
 
-*If it's an issue pertaining to the jquery-ujs javascript, please
-report it to the [jquery-ujs project](https://github.com/rails/jquery-ujs).*
+**If it's an issue pertaining to the jquery-ujs javascript, please
+report it to the [rails/jquery-ujs project](https://github.com/rails/jquery-ujs/issues).**
 
 ## Tests
 
