@@ -6,8 +6,7 @@ if ::Rails.version < "3.1" || !::Rails.application.config.assets.enabled
     module Generators
       class InstallGenerator < ::Rails::Generators::Base
 
-        desc "This generator installs jQuery #{Jquery::Rails::JQUERY_VERSION}, jQuery-ujs, and (optionally) jQuery UI #{Jquery::Rails::JQUERY_UI_VERSION}"
-        class_option :ui, :type => :boolean, :default => false, :desc => "Include jQueryUI"
+        desc "This generator installs jQuery #{Jquery::Rails::JQUERY_VERSION} and jQuery-ujs"
         source_root File.expand_path('../../../../../vendor/assets/javascripts', __FILE__)
 
         def remove_prototype
@@ -20,14 +19,6 @@ if ::Rails.version < "3.1" || !::Rails.application.config.assets.enabled
           say_status("copying", "jQuery (#{Jquery::Rails::JQUERY_VERSION})", :green)
           copy_file "jquery.js", "public/javascripts/jquery.js"
           copy_file "jquery.min.js", "public/javascripts/jquery.min.js"
-        end
-
-        def copy_jquery_ui
-          if options.ui?
-            say_status("copying", "jQuery UI (#{Jquery::Rails::JQUERY_UI_VERSION})", :green)
-            copy_file "jquery-ui.js", "public/javascripts/jquery-ui.js"
-            copy_file "jquery-ui.min.js", "public/javascripts/jquery-ui.min.js"
-          end
         end
 
         def copy_ujs_driver
