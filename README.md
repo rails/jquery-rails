@@ -56,17 +56,20 @@ jquery-ui-rails gem above.*
 
 ### Rails 3.0 (or greater with asset pipeline *disabled*)
 
-This gem adds a single generator: `jquery:install`. Running the generator will remove any Prototype JS files you may happen to have, and copy jQuery and the jQuery-ujs driver for Rails (and optionally, jQuery UI) to the `public/javascripts` directory.
+This gem adds a single generator: `jquery:install`. Running the generator will remove any Prototype JS files you may happen to have, and copy jQuery and the jQuery-ujs driver for Rails to the `public/javascripts` directory.
 
-This gem will also hook into the Rails configuration process, removing Prototype and adding jQuery to the javascript files included by the `javascript_include_tag(:defaults)` call. While this gem contains the minified and un-minified versions of jQuery and jQuery UI, only the minified versions will be included in the `:defaults` when Rails is run in `production` or `test` mode  (un-minified versions will be included when Rails is run in `development` mode).
+This gem will also hook into the Rails configuration process, removing Prototype and adding jQuery to the javascript files included by the `javascript_include_tag(:defaults)` call. While this gem contains the minified and un-minified versions of jQuery, only the minified versions will be included in the `:defaults` when Rails is run in `production` or `test` mode  (un-minified versions will be included when Rails is run in `development` mode).
 
 To invoke the generator, run:
 
 ```sh
-rails generate jquery:install #--ui to enable jQuery UI
+rails generate jquery:install
 ```
 
 You're done!
+
+*As of v3.0, jquery-rails no longer includes jQuery UI, you will need to
+install it by yourself as needed.*
 
 ## Contributing
 
@@ -74,7 +77,7 @@ Feel free to open an issue ticket if you find something that could be improved. 
 
 * If it's an issue pertaining to the jquery-ujs javascript, please report it to the [jquery-ujs project](https://github.com/rails/jquery-ujs).
 
-* If the jquery or jquery-ui scripts are outdated (i.e. maybe a new version of jquery was released yesterday), feel free to open an issue and prod us to get that thing updated. However, for security reasons, we won't be accepting pull requests with updated jquery or jquery-ui scripts.
+* If the jquery scripts are outdated (i.e. maybe a new version of jquery was released yesterday), feel free to open an issue and prod us to get that thing updated. However, for security reasons, we won't be accepting pull requests with updated jquery scripts.
 
 ## Acknowledgements
 
