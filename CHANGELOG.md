@@ -1,3 +1,7 @@
+## 3.0.1 (02 Jun 2013)
+
+  - Updated to jQuery 1.10.1
+
 ## 3.0.0 (29 May 2013)
 
   - Removed jQuery UI
