@@ -1,3 +1,8 @@
+## 3.0.1 (07 June 2013)
+
+  - Updated to jQuery 1.10.1
+  - Removed jQuery UI from generator
+
 ## 3.0.0 (29 May 2013)
 
   - Removed jQuery UI
