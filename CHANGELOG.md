@@ -1,7 +1,7 @@
 ## 3.0.4 (10 July 2013)
 
-  - Updated to jQuery 1.10.2
-  - 
+  - Fixed jQuery source map
+ 
 ## 3.0.3 (10 July 2013)
 
   - Updated to jQuery 1.10.2
