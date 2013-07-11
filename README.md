@@ -19,7 +19,7 @@ minor version bump = minor-level updates to jquery
 major version bump = major-level updates to jquery and updates to rails which may be backwards-incompatible
 ```
 
-See VERSIONS.md to see which versions of jquery-rails bundle which
+See [VERSIONS.md](VERSIONS.md) to see which versions of jquery-rails bundle which
 versions of jQuery.
 
 ## Installation
