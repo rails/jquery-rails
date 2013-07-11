@@ -19,3 +19,12 @@ task :guard_version do
 
   check_version('jquery.js', /jQuery JavaScript Library v([\S]+)/, 'JQUERY_VERSION')
 end
+
+task :update_jquery do
+  puts "Downloading jquery.js..."
+  puts `curl -o vendor/assets/javascripts/jquery.js http://code.jquery.com/jquery.js`
+  puts "Downloading jquery.min.js..."
+  puts `curl -o vendor/assets/javascripts/jquery.min.js http://code.jquery.com/jquery.min.js`
+  puts "Downloading jquery.min.map..."
+  puts `curl -o vendor/assets/javascripts/jquery.min.map http://code.jquery.com/jquery.min.map`
+end
