@@ -1,3 +1,9 @@
+## 3.0.4 (29 January 2014)
+
+  - Updated to jQuery 1.11.0
+  - Updated to latest jquery-ujs
+  - Added development rake task for updating jQuery
+
 ## 3.0.4 (10 July 2013)
 
   - Fixed jQuery source map
