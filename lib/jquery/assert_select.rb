@@ -50,7 +50,7 @@ module ActionDispatch
         jquery_opt    = args.first.is_a?(Symbol) ? args.shift : nil
         id            = args.first.is_a?(String) ? args.shift : nil
 
-        pattern = "\\.#{jquery_method || '\\w+'}\\("
+        pattern = "\\s*\\.#{jquery_method || '\\w+'}\\("
         pattern = "#{pattern}['\"]#{jquery_opt}['\"],?\\s*" if jquery_opt
         pattern = "#{pattern}#{PATTERN_HTML}"
         pattern = "(?:jQuery|\\$)\\(['\"]#{id}['\"]\\)#{pattern}" if id
