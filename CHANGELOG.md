@@ -1,3 +1,7 @@
+## 4.0.0
+
+  - Minimum dependency set to Rails 4.2
+
 ## 3.1.1 (23 June 2014)
 
   - Updated to jQuery 1.11.1
