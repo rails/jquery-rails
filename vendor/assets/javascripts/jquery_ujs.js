@@ -70,7 +70,7 @@
     formSubmitSelector: 'form',
 
     // Form input elements bound by jquery-ujs
-    formInputClickSelector: 'form input[type=submit], form input[type=image], form button[type=submit], form button:not([type])',
+    formInputClickSelector: 'form input[type=submit], form input[type=image], form button[type=submit], form button:not([type]), input[type=submit][form], input[type=image][form], button[type=submit][form], button[form]:not([type])',
 
     // Form input elements disabled during form submission
     disableSelector: 'input[data-disable-with], button[data-disable-with], textarea[data-disable-with]',
