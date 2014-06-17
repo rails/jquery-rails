@@ -2,6 +2,6 @@ module Jquery
   module Rails
     VERSION = "3.1.0"
     JQUERY_VERSION = "1.11.1"
-    JQUERY_UJS_VERSION = "f160fa2f4615f93e1a0d75e49de59d19c18c8728"
+    JQUERY_UJS_VERSION = "c7a5b12a3b37c4a20f4e5fb22da843f24ef2d356"
   end
 end
