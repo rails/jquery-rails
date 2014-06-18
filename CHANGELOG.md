@@ -1,7 +1,7 @@
 ## 3.1.1 (Unreleased)
 
   - Updated to jQuery 1.11.1
-  - Updated to latest jquery-ujs
+  - Updated to jquery-ujs 1.0.0
 
 ## 3.1.0 (29 January 2014)
 
