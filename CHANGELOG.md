@@ -1,3 +1,8 @@
+## 3.1.1 (23 June 2014)
+
+  - Updated to jQuery 1.11.1
+  - Updated to jquery-ujs 1.0.0
+
 ## 3.1.0 (29 January 2014)
 
   - Updated to jQuery 1.11.0
@@ -7,7 +12,7 @@
 ## 3.0.4 (10 July 2013)
 
   - Fixed jQuery source map
- 
+
 ## 3.0.3 (10 July 2013)
 
   - Updated to jQuery 1.10.2
