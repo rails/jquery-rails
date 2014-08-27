@@ -4,7 +4,7 @@
  * Unobtrusive scripting adapter for jQuery
  * https://github.com/rails/jquery-ujs
  *
- * Requires jQuery 1.7.0 or later.
+ * Requires jQuery 1.8.0 or later.
  *
  * Released under the MIT license
  *
@@ -25,7 +25,7 @@
     linkClickSelector: 'a[data-confirm], a[data-method], a[data-remote], a[data-disable-with], a[data-disable]',
 
     // Button elements bound by jquery-ujs
-    buttonClickSelector: 'button[data-remote], button[data-confirm]',
+    buttonClickSelector: 'button[data-remote]:not(form button), button[data-confirm]:not(form button)',
 
     // Select elements bound by jquery-ujs
     inputChangeSelector: 'select[data-remote], input[data-remote], textarea[data-remote]',
@@ -34,7 +34,7 @@
     formSubmitSelector: 'form',
 
     // Form input elements bound by jquery-ujs
-    formInputClickSelector: 'form input[type=submit], form input[type=image], form button[type=submit], form button:not([type])',
+    formInputClickSelector: 'form input[type=submit], form input[type=image], form button[type=submit], form button:not([type]), input[type=submit][form], input[type=image][form], button[type=submit][form], button[form]:not([type])',
 
     // Form input elements disabled during form submission
     disableSelector: 'input[data-disable-with]:enabled, button[data-disable-with]:enabled, textarea[data-disable-with]:enabled, input[data-disable]:enabled, button[data-disable]:enabled, textarea[data-disable]:enabled',
@@ -356,6 +356,7 @@
 
     $document.delegate(rails.buttonClickSelector, 'click.rails', function(e) {
       var button = $(this);
+
       if (!rails.allowAction(button)) return rails.stopEverything(e);
 
       if (button.is(rails.buttonDisableSelector)) rails.disableFormElement(button);
