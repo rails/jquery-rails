@@ -1,5 +1,7 @@
-module ActionDispatch
-  module Assertions
+require 'rails/dom/testing/assertions/selector_assertions'
+
+module Jquery
+  module Rails
     module SelectorAssertions
       # Selects content from a JQuery response.  Patterned loosely on
       # assert_select_rjs.
@@ -55,15 +57,15 @@ module ActionDispatch
         pattern = "#{pattern}#{PATTERN_HTML}"
         pattern = "(?:jQuery|\\$)\\(['\"]#{id}['\"]\\)#{pattern}" if id
 
-        fragments = []
+        fragments = Nokogiri::HTML::Document.new
         response.body.scan(Regexp.new(pattern)).each do |match|
-          doc = HTML::Document.new(unescape_js(match.first))
+          doc = Nokogiri::HTML::Document.parse(unescape_js(match.first))
           doc.root.children.each do |child|
-            fragments.push child if child.tag?
+            fragments << child if child.element?
           end
         end
 
-        if fragments.empty?
+        unless fragments.children.any? {|child| child.element?}
           opts = [jquery_method, jquery_opt, id].compact
           flunk "No JQuery call matches #{opts.inspect}"
         end
@@ -93,7 +95,10 @@ module ActionDispatch
         unescaped.gsub!(PATTERN_UNICODE_ESCAPED_CHAR) {|u| [$1.hex].pack('U*')}
         unescaped
       end
-
     end
   end
+end
+
+module Rails::Dom::Testing::Assertions::SelectorAssertions
+  include Jquery::Rails::SelectorAssertions
 end
