@@ -4,7 +4,7 @@ jQuery! For Rails! So great.
 
 This gem provides:
 
-  * jQuery 1.11.1
+  * jQuery 1.11.1 and jQuery 2.1.1
   * the jQuery UJS adapter
   * assert_select_jquery to test jQuery responses in Ruby tests
 
@@ -28,6 +28,13 @@ The jquery and jquery-ujs files will be added to the asset pipeline and availabl
 
 ```js
 //= require jquery
+//= require jquery_ujs
+```
+
+If you want to use jQuery 2, you can require `jquery2` instead:
+
+```js
+//= require jquery2
 //= require jquery_ujs
 ```
 
