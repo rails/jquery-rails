@@ -65,7 +65,7 @@ module Jquery
           end
         end
 
-        unless fragments.children.any? {|child| child.element?}
+        unless fragments.children.any? { |child| child.element? }
           opts = [jquery_method, jquery_opt, id].compact
           flunk "No JQuery call matches #{opts.inspect}"
         end
