@@ -37,3 +37,9 @@ task :update_jquery do
   download_jquery('jquery2', Jquery::Rails::JQUERY_2_VERSION)
   puts "\e[32mDone!\e[0m"
 end
+
+task :update_jquery_ujs do
+  puts "Downloading jquery_ujs.js"
+  puts `curl -o vendor/assets/javascripts/jquery_ujs.js https://raw.githubusercontent.com/rails/jquery-ujs/v#{Jquery::Rails::JQUERY_UJS_VERSION}/src/rails.js`
+  puts "\e[32mDone!\e[0m"
+end
