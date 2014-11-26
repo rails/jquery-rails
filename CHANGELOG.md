@@ -1,6 +1,8 @@
 ## 4.0.0
 
   - Minimum dependency set to Rails 4.2
+  - Updated to jquery-ujs 1.0.2
+  - Support jQuery 1.x and 2.x
 
 ## 3.1.2 (1 September 2014)
 
