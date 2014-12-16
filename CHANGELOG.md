@@ -1,3 +1,7 @@
+## 4.0.1
+
+  - Fix RubyGems permission problem.
+
 ## 4.0.0
 
   - Minimum dependency set to Rails 4.2
