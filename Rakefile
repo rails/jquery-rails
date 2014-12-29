@@ -21,6 +21,7 @@ task :guard_version do
   check_version('jquery2.js', /jQuery JavaScript Library v([\S]+)/, 'JQUERY_2_VERSION')
 end
 
+desc "Update jQuery versions"
 task :update_jquery do
   def download_jquery(filename, version)
     suffix = "-#{version}"
@@ -38,6 +39,7 @@ task :update_jquery do
   puts "\e[32mDone!\e[0m"
 end
 
+desc "Update jQuery UJS version"
 task :update_jquery_ujs do
   puts "Downloading jquery_ujs.js"
   puts `curl -o vendor/assets/javascripts/jquery_ujs.js https://raw.githubusercontent.com/rails/jquery-ujs/v#{Jquery::Rails::JQUERY_UJS_VERSION}/src/rails.js`
