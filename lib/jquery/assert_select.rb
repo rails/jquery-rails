@@ -41,25 +41,57 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
   # assert_select :html, '#cart' do
   #   assert_select '#current_item'
   # end
+  #
+  # # asserts that #product append to a #product_list
+  # assert_select_jquery :appendTo, '#product_list' do
+  #   assert_select '.product'
+  # end
 
   PATTERN_HTML  = "\"((\\\\\"|[^\"])*)\""
   PATTERN_UNICODE_ESCAPED_CHAR = /\\u([0-9a-zA-Z]{4})/
+  SKELETAL_PATTERN = "(?:jQuery|\\$)\\(%s\\)\\.%s\\(%s\\);"
 
   def assert_select_jquery(*args, &block)
     jquery_method = args.first.is_a?(Symbol) ? args.shift : nil
     jquery_opt    = args.first.is_a?(Symbol) ? args.shift : nil
     id            = args.first.is_a?(String) ? args.shift : nil
 
-    pattern = "\\s*\\.#{jquery_method || '\\w+'}\\("
-    pattern = "#{pattern}['\"]#{jquery_opt}['\"],?\\s*" if jquery_opt
-    pattern = "#{pattern}#{PATTERN_HTML}"
-    pattern = "(?:jQuery|\\$)\\(['\"]#{id}['\"]\\)#{pattern}" if id
+    target_pattern   = "['\"]#{id || '.*'}['\"]"
+    method_pattern   = "#{jquery_method || '\\w+'}"
+    argument_pattern = jquery_opt ? "['\"]#{jquery_opt}['\"].*" : PATTERN_HTML
+
+    # $("#id").show('blind', 1000);
+    # $("#id").html("<div>something</div>");
+    # $("#id").replaceWith("<div>something</div>");
+    target_as_receiver_pattern = SKELETAL_PATTERN % [target_pattern, method_pattern, argument_pattern]
+
+    # $("<div>something</div>").appendTo("#id");
+    # $("<div>something</div>").prependTo("#id");
+    target_as_argument_pattern = SKELETAL_PATTERN % [argument_pattern, method_pattern, target_pattern]
+
+    # $("#id").remove();
+    # $("#id").hide();
+    argumentless_pattern = SKELETAL_PATTERN % [target_pattern, method_pattern, '']
+
+    patterns = [target_as_receiver_pattern, target_as_argument_pattern]
+    patterns << argumentless_pattern unless jquery_opt
+
+    matched_pattern = nil
+    patterns.each do |pattern|
+      if response.body.match(Regexp.new(pattern))
+        matched_pattern = pattern
+        break
+      end
+    end
 
     fragments = Nokogiri::HTML::Document.new
-    response.body.scan(Regexp.new(pattern)).each do |match|
-      doc = Nokogiri::HTML::Document.parse(unescape_js(match.first))
-      doc.root.children.each do |child|
-        fragments << child if child.element?
+
+    if matched_pattern
+      response.body.scan(Regexp.new(matched_pattern)).each do |match|
+        doc = Nokogiri::HTML::Document.parse(unescape_js(match.first))
+        doc.root.children.each do |child|
+          fragments << child if child.element?
+        end
       end
     end
 
