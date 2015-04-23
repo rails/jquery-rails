@@ -1,5 +1,15 @@
 require 'bundler'
+require 'rake/testtask'
 Bundler::GemHelper.install_tasks
+
+task default: :test
+
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.pattern = 'test/**/*_test.rb'
+  t.warning = true
+  t.verbose = true
+end
 
 # Check if versions are correct between VERSION constants and .js files
 #

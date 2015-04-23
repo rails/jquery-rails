@@ -84,23 +84,26 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
       end
     end
 
-    fragments = Nokogiri::HTML::Document.new
-
-    if matched_pattern
-      response.body.scan(Regexp.new(matched_pattern)).each do |match|
-        doc = Nokogiri::HTML::Document.parse(unescape_js(match.first))
-        doc.root.children.each do |child|
-          fragments << child if child.element?
-        end
-      end
-    end
-
-    unless fragments.children.any? { |child| child.element? }
+    unless matched_pattern
       opts = [jquery_method, jquery_opt, id].compact
       flunk "No JQuery call matches #{opts.inspect}"
     end
 
-    if block
+    if block_given?
+      @selected ||= nil
+      fragments = Nokogiri::HTML::Document.new
+
+      if matched_pattern
+        response.body.scan(Regexp.new(matched_pattern)).each do |match|
+          flunk 'This function can\'t have HTML argument' if match.is_a?(String)
+
+          doc = Nokogiri::HTML::Document.parse(unescape_js(match.first))
+          doc.root.children.each do |child|
+            fragments << child if child.element?
+          end
+        end
+      end
+
       begin
         in_scope, @selected = @selected, fragments
         yield
