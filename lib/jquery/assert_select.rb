@@ -47,7 +47,7 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
   #   assert_select '.product'
   # end
 
-  PATTERN_HTML  = "\"((\\\\\"|[^\"])*)\""
+  PATTERN_HTML  = "['\"]((\\\\\"|[^\"])*)['\"]"
   PATTERN_UNICODE_ESCAPED_CHAR = /\\u([0-9a-zA-Z]{4})/
   SKELETAL_PATTERN = "(?:jQuery|\\$)\\(%s\\)\\.%s\\(%s\\);"
 

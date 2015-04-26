@@ -7,11 +7,11 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
 
   JAVASCRIPT_TEST_OUTPUT = <<-JS
     $("#card").show("blind", 1000);
-    $("#id").html("<div><p>something</p></div>");
+    $("#id").html('<div><p>something</p></div>');
     jQuery("#id").replaceWith("<div><p>something</p></div>");
     $("<div><p>something</p></div>").appendTo("#id");
     jQuery("<div><p>something</p></div>").prependTo("#id");
-    $("#id").remove();
+    $('#id').remove();
     jQuery("#id").hide();
   JS
 
