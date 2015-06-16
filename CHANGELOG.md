@@ -1,3 +1,7 @@
+## 3.1.3 (16 June 2015)
+
+  - Fix CSP bypass vulnerability. CVE-2015-1840
+
 ## 3.1.2 (1 September 2014)
 
   - Updated to jquery-ujs 1.0.1
