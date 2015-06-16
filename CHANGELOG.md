@@ -1,3 +1,7 @@
+## 4.0.4
+
+  - Fix CSP bypass vulnerability. CVE-2015-1840
+
 ## 4.0.1
 
   - Fix RubyGems permission problem.
