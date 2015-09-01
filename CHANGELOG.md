@@ -1,3 +1,9 @@
+## 4.0.5
+
+- Specify that Ruby version 1.9.3+ is required
+- Test on Ruby 2.2
+- Update jquery-ujs from 1.0.4 to 1.1.0
+
 ## 4.0.4
 
   - Fix CSP bypass vulnerability. CVE-2015-1840
