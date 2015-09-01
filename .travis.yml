@@ -7,6 +7,8 @@ rvm:
   - ruby-head
 matrix:
   fast_finish: true
+    allow_failures:
+    - rvm: jruby
 notifications:
   email: false
   irc:
@@ -18,4 +20,4 @@ notifications:
     on_success: change
     on_failure: always
     rooms:
-      - secure: ""
+      - secure: "p58t43P+64c1g0Av88DNM9XxMnmXM/PzRFU4yeo53i7lDY77PqKOVY+swc8eibn6cMgfyw2vqI7UFri4WLxwdN5jN5QaByHtXT2STFaJV4ORyyOBqQLuJTFWzMn8+Zil3rW/0Xv6tHoeAjsToZyYFefyjM3qemAmUqI8jLqU1sM="
