@@ -43,16 +43,20 @@ For jQuery UI, we recommend the [jquery-ui-rails](https://github.com/joliss/jque
 *As of v3.0, jquery-rails no longer includes jQuery UI. Use the
 jquery-ui-rails gem above.*
 
-## Contributing
+## Contributing to jquery-rails
 
-Feel free to open an issue ticket if you find something that could be improved. A couple notes:
+jquery-rails is work of many contributors. You're encouraged to submit pull requests, propose
+features and discuss issues.
 
 * If it's an issue pertaining to the jquery-ujs javascript, please report it to the [jquery-ujs project](https://github.com/rails/jquery-ujs).
 
 * If the jQuery scripts are outdated (i.e. maybe a new version of jquery was released yesterday), feel free to open an issue and prod us to get that thing updated. However, for security reasons, we won't be accepting pull requests with updated jQuery scripts.
 
+See [CONTRIBUTING](CONTRIBUTING.md).
+
+## License
+jquery-rails is released under the [MIT License](MIT-LICENSE).
+
 ## Acknowledgements
 
 Many thanks are due to all of [the jquery-rails contributors](https://github.com/rails/jquery-rails/graphs/contributors). Special thanks to [JangoSteve](http://github.com/JangoSteve) for tirelessly answering questions and accepting patches, and the [Rails Core Team](https://github.com/organizations/rails/teams/617) for making jquery-rails an official part of Rails 3.1.
-
-Copyright [André Arko](http://arko.net), released under the MIT License.
