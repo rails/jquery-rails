@@ -338,10 +338,15 @@
     //  and prevent clicking on it
     disableElement: function(element) {
       var replacement = element.data('disable-with');
+      var classes     = element.data('disable-class');
 
       element.data('ujs:enable-with', element.html()); // store enabled state
       if (replacement !== undefined) {
         element.html(replacement);
+      }
+
+      if (classes !== undefined) {
+        element.addClass(classes);
       }
 
       element.bind('click.railsDisable', function(e) { // prevent further clicking
@@ -351,10 +356,17 @@
 
     // restore element to its original state which was disabled by 'disableElement' above
     enableElement: function(element) {
+      var classes = element.data('disable-class');
+
       if (element.data('ujs:enable-with') !== undefined) {
         element.html(element.data('ujs:enable-with')); // set to old enabled state
         element.removeData('ujs:enable-with'); // clean up cache
       }
+
+      if (classes !== undefined) {
+        element.removeClass(classes);
+      }
+
       element.unbind('click.railsDisable'); // enable element
     }
   };
