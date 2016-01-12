@@ -24,10 +24,10 @@
 
   $.rails = rails = {
     // Link elements bound by jquery-ujs
-    linkClickSelector: 'a[data-confirm], a[data-method], a[data-remote], a[data-disable-with], a[data-disable]',
+    linkClickSelector: 'a[data-confirm], a[data-method], a[data-remote]:not([disabled]), a[data-disable-with], a[data-disable]',
 
     // Button elements bound by jquery-ujs
-    buttonClickSelector: 'button[data-remote]:not(form button), button[data-confirm]:not(form button)',
+    buttonClickSelector: 'button[data-remote]:not([form]):not(form button), button[data-confirm]:not([form]):not(form button)',
 
     // Select elements bound by jquery-ujs
     inputChangeSelector: 'select[data-remote], input[data-remote], textarea[data-remote]',
@@ -45,7 +45,7 @@
     enableSelector: 'input[data-disable-with]:disabled, button[data-disable-with]:disabled, textarea[data-disable-with]:disabled, input[data-disable]:disabled, button[data-disable]:disabled, textarea[data-disable]:disabled',
 
     // Form required input elements
-    requiredInputSelector: 'input[name][required]:not([disabled]),textarea[name][required]:not([disabled])',
+    requiredInputSelector: 'input[name][required]:not([disabled]), textarea[name][required]:not([disabled])',
 
     // Form file input elements
     fileInputSelector: 'input[type=file]:not([disabled])',
@@ -72,7 +72,7 @@
       if (token) xhr.setRequestHeader('X-CSRF-Token', token);
     },
 
-    // making sure that all forms have actual up-to-date token(cached forms contain old one)
+    // Make sure that all forms have actual up-to-date tokens (cached forms contain old ones)
     refreshCSRFTokens: function(){
       $('form input[name="' + rails.csrfParam() + '"]').val(rails.csrfToken());
     },
@@ -113,15 +113,17 @@
         dataType = element.data('type') || ($.ajaxSettings && $.ajaxSettings.dataType);
 
         if (element.is('form')) {
-          method = element.attr('method');
-          url = element.attr('action');
-          data = element.serializeArray();
+          method = element.data('ujs:submit-button-formmethod') || element.attr('method');
+          url = element.data('ujs:submit-button-formaction') || element.attr('action');
+          data = $(element[0].elements).serializeArray();
           // memoized value from clicked submit button
           var button = element.data('ujs:submit-button');
           if (button) {
             data.push(button);
             element.data('ujs:submit-button', null);
           }
+          element.data('ujs:submit-button-formmethod', null);
+          element.data('ujs:submit-button-formaction', null);
         } else if (element.is(rails.inputChangeSelector)) {
           method = element.data('method');
           url = element.data('url');
@@ -250,12 +252,13 @@
       method = element.is('button') ? 'html' : 'val';
       replacement = element.data('disable-with');
 
-      element.data('ujs:enable-with', element[method]());
       if (replacement !== undefined) {
+        element.data('ujs:enable-with', element[method]());
         element[method](replacement);
       }
 
       element.prop('disabled', true);
+      element.data('ujs:disabled', true);
     },
 
     /* Re-enables disabled form elements:
@@ -270,8 +273,12 @@
 
     enableFormElement: function(element) {
       var method = element.is('button') ? 'html' : 'val';
-      if (typeof element.data('ujs:enable-with') !== 'undefined') element[method](element.data('ujs:enable-with'));
+      if (element.data('ujs:enable-with') !== undefined) {
+        element[method](element.data('ujs:enable-with'));
+        element.removeData('ujs:enable-with'); // clean up cache
+      }
       element.prop('disabled', false);
+      element.removeData('ujs:disabled');
     },
 
    /* For 'data-confirm' attribute:
@@ -334,28 +341,30 @@
       return false;
     },
 
-    //  replace element's html with the 'data-disable-with' after storing original html
+    //  Replace element's html with the 'data-disable-with' after storing original html
     //  and prevent clicking on it
     disableElement: function(element) {
       var replacement = element.data('disable-with');
 
-      element.data('ujs:enable-with', element.html()); // store enabled state
       if (replacement !== undefined) {
+        element.data('ujs:enable-with', element.html()); // store enabled state
         element.html(replacement);
       }
 
       element.bind('click.railsDisable', function(e) { // prevent further clicking
         return rails.stopEverything(e);
       });
+      element.data('ujs:disabled', true);
     },
 
-    // restore element to its original state which was disabled by 'disableElement' above
+    // Restore element to its original state which was disabled by 'disableElement' above
     enableElement: function(element) {
       if (element.data('ujs:enable-with') !== undefined) {
         element.html(element.data('ujs:enable-with')); // set to old enabled state
         element.removeData('ujs:enable-with'); // clean up cache
       }
       element.unbind('click.railsDisable'); // enable element
+      element.removeData('ujs:disabled');
     }
   };
 
@@ -372,7 +381,7 @@
       $($.rails.enableSelector).each(function () {
         var element = $(this);
 
-        if (element.data('ujs:enable-with')) {
+        if (element.data('ujs:disabled')) {
           $.rails.enableFormElement(element);
         }
       });
@@ -380,7 +389,7 @@
       $($.rails.linkDisableSelector).each(function () {
         var element = $(this);
 
-        if (element.data('ujs:enable-with')) {
+        if (element.data('ujs:disabled')) {
           $.rails.enableElement(element);
         }
       });
@@ -404,7 +413,7 @@
         if (metaClick && (!method || method === 'GET') && !data) { return true; }
 
         var handleRemote = rails.handleRemote(link);
-        // response from rails.handleRemote() will either be false or a deferred object promise.
+        // Response from rails.handleRemote() will either be false or a deferred object promise.
         if (handleRemote === false) {
           rails.enableElement(link);
         } else {
@@ -426,7 +435,7 @@
       if (button.is(rails.buttonDisableSelector)) rails.disableFormElement(button);
 
       var handleRemote = rails.handleRemote(button);
-      // response from rails.handleRemote() will either be false or a deferred object promise.
+      // Response from rails.handleRemote() will either be false or a deferred object promise.
       if (handleRemote === false) {
         rails.enableFormElement(button);
       } else {
@@ -451,23 +460,29 @@
 
       if (!rails.allowAction(form)) return rails.stopEverything(e);
 
-      // skip other logic when required values are missing or file upload is present
+      // Skip other logic when required values are missing or file upload is present
       if (form.attr('novalidate') === undefined) {
-        blankRequiredInputs = rails.blankInputs(form, rails.requiredInputSelector, false);
-        if (blankRequiredInputs && rails.fire(form, 'ajax:aborted:required', [blankRequiredInputs])) {
-          return rails.stopEverything(e);
+        if (form.data('ujs:formnovalidate-button') === undefined) {
+          blankRequiredInputs = rails.blankInputs(form, rails.requiredInputSelector, false);
+          if (blankRequiredInputs && rails.fire(form, 'ajax:aborted:required', [blankRequiredInputs])) {
+            return rails.stopEverything(e);
+          }
+        } else {
+          // Clear the formnovalidate in case the next button click is not on a formnovalidate button
+          // Not strictly necessary to do here, since it is also reset on each button click, but just to be certain
+          form.data('ujs:formnovalidate-button', undefined);
         }
       }
 
       if (remote) {
         nonBlankFileInputs = rails.nonBlankInputs(form, rails.fileInputSelector);
         if (nonBlankFileInputs) {
-          // slight timeout so that the submit button gets properly serialized
+          // Slight timeout so that the submit button gets properly serialized
           // (make it easy for event handler to serialize form without disabled values)
           setTimeout(function(){ rails.disableFormElements(form); }, 13);
           var aborted = rails.fire(form, 'ajax:aborted:file', [nonBlankFileInputs]);
 
-          // re-enable form elements if event bindings return false (canceling normal form submission)
+          // Re-enable form elements if event bindings return false (canceling normal form submission)
           if (!aborted) { setTimeout(function(){ rails.enableFormElements(form); }, 13); }
 
           return aborted;
@@ -477,7 +492,7 @@
         return false;
 
       } else {
-        // slight timeout so that the submit button gets properly serialized
+        // Slight timeout so that the submit button gets properly serialized
         setTimeout(function(){ rails.disableFormElements(form); }, 13);
       }
     });
@@ -487,11 +502,20 @@
 
       if (!rails.allowAction(button)) return rails.stopEverything(event);
 
-      // register the pressed submit button
+      // Register the pressed submit button
       var name = button.attr('name'),
         data = name ? {name:name, value:button.val()} : null;
 
-      button.closest('form').data('ujs:submit-button', data);
+      var form = button.closest('form');
+      if (form.length === 0) {
+        form = $('#' + button.attr('form'));
+      }
+      form.data('ujs:submit-button', data);
+
+      // Save attributes from button
+      form.data('ujs:formnovalidate-button', button.attr('formnovalidate'));
+      form.data('ujs:submit-button-formaction', button.attr('formaction'));
+      form.data('ujs:submit-button-formmethod', button.attr('formmethod'));
     });
 
     $document.delegate(rails.formSubmitSelector, 'ajax:send.rails', function(event) {
