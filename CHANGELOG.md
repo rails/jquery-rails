@@ -1,3 +1,8 @@
+## 4.1.0
+
+- Update jQuery to 1.12.0 and 2.2.0
+- Update jquery-ujs to 1.2.0
+
 ## 4.0.5
 
 - Specify that Ruby version 1.9.3+ is required
