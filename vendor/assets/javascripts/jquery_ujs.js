@@ -318,8 +318,19 @@
         valueToCheck = input.is('input[type=checkbox],input[type=radio]') ? input.is(':checked') : !!input.val();
         if (valueToCheck === nonBlank) {
 
-          // Don't count unchecked required radio if other radio with same name is checked
-          if (input.is('input[type=radio]') && allInputs.filter('input[type=radio]:checked[name="' + input.attr('name') + '"]').length) {
+          // We cannot just compare allInputs for radio buttons, as the spec for required radio buttons
+          // states that only one of a radio button set needs to be required.
+          // If you have 2 radio buttons, and one is checked, but it's not required, then we get
+          // the other required radio button and see that there are no other radio buttons checked
+          // for the "required" ones.
+          // Thus, if the input control is a radio button, then filter for all radio buttons with
+          // the same name on the form.
+
+          // This will get all radio buttons of a given name that are checked and see that at
+          // least one is checked. Don't count unchecked required radio if other radio with same
+          // name is checked. But do count checked non-required radio of the same name.
+          if (input.is('input[type=radio]') &&
+            form.find('input[type=radio]:checked[name="' + input.attr('name') + '"]').length) {
             return true; // Skip to next input
           }
 
