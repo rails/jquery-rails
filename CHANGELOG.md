@@ -1,3 +1,8 @@
+## 4.1.1
+
+- Update jQuery to 1.12.1 and 2.2.1
+- Update jquery-ujs to 1.2.0
+
 ## 4.1.0
 
 - Update jQuery to 1.12.0 and 2.2.0
