@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["André Arko"]
   s.email       = ["andre@arko.net"]
-  s.homepage    = "http://rubygems.org/gems/jquery-rails"
+  s.homepage    = "https://github.com/rails/jquery-rails"
   s.summary     = "Use jQuery with Rails 4+"
   s.description = "This gem provides jQuery and the jQuery-ujs driver for your Rails 4+ application."
   s.license     = "MIT"
