@@ -38,6 +38,13 @@ If you want to use jQuery 2, you can require `jquery2` instead:
 //= require jquery_ujs
 ```
 
+If you want to use jQuery 3, you can require `jquery3` instead:
+
+```js
+//= require jquery3
+//= require jquery_ujs
+```
+
 For jQuery UI, we recommend the [jquery-ui-rails](https://github.com/joliss/jquery-ui-rails) gem, as it includes the jquery-ui css and allows easier customization.
 
 *As of v3.0, jquery-rails no longer includes jQuery UI. Use the

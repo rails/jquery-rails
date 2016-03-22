@@ -1,3 +1,7 @@
+## 4.2.0
+
+- Add jQuery 3 support and include jQuery 3.0.0-beta1
+
 ## 4.1.1
 
 - Update jQuery to 1.12.1 and 2.2.1
