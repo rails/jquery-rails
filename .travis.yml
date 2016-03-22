@@ -9,6 +9,8 @@ rvm:
   - 2.3.0
   - jruby
   - ruby-head
+before_install:
+  - gem install bundler -v 1.10.6
 matrix:
   fast_finish: true
   allow_failures:
