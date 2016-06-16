@@ -29,6 +29,7 @@ task :guard_version do
 
   check_version('jquery.js', /jQuery JavaScript Library v([\S]+)/, 'JQUERY_VERSION')
   check_version('jquery2.js', /jQuery JavaScript Library v([\S]+)/, 'JQUERY_2_VERSION')
+  check_version('jquery3.js', /jQuery JavaScript Library v([\S]+)/, 'JQUERY_3_VERSION')
 end
 
 desc "Update jQuery versions"
