@@ -29,6 +29,7 @@ task :guard_version do
 
   check_version('jquery.js', /jQuery JavaScript Library v([\S]+)/, 'JQUERY_VERSION')
   check_version('jquery2.js', /jQuery JavaScript Library v([\S]+)/, 'JQUERY_2_VERSION')
+  check_version('jquery3.js', /jQuery JavaScript Library v([\S]+)/, 'JQUERY_3_VERSION')
 end
 
 desc "Update jQuery versions"
@@ -46,6 +47,7 @@ task :update_jquery do
 
   download_jquery('jquery', Jquery::Rails::JQUERY_VERSION)
   download_jquery('jquery2', Jquery::Rails::JQUERY_2_VERSION)
+  download_jquery('jquery3', Jquery::Rails::JQUERY_3_VERSION)
   puts "\e[32mDone!\e[0m"
 end
 

@@ -4,7 +4,7 @@ jQuery! For Rails! So great.
 
 This gem provides:
 
-  * jQuery 1 and jQuery 2
+  * jQuery 1, 2 and 3
   * the jQuery UJS adapter
   * assert_select_jquery to test jQuery responses in Ruby tests
 
@@ -35,6 +35,13 @@ If you want to use jQuery 2, you can require `jquery2` instead:
 
 ```js
 //= require jquery2
+//= require jquery_ujs
+```
+
+And if you want to use jQuery 3, you can require `jquery3`:
+
+```js
+//= require jquery3
 //= require jquery_ujs
 ```
 
