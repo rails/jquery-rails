@@ -1,4 +1,4 @@
-## 5.0.0
+## 4.2.0
 
 - Support jQuery 3.x
 
