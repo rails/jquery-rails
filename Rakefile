@@ -38,11 +38,11 @@ task :update_jquery do
     suffix = "-#{version}"
 
     puts "Downloading #{filename}.js"
-    puts `curl -o vendor/assets/javascripts/#{filename}.js http://code.jquery.com/jquery#{suffix}.js`
+    puts `curl -o vendor/assets/javascripts/#{filename}.js https://code.jquery.com/jquery#{suffix}.js`
     puts "Downloading #{filename}.min.js"
-    puts `curl -o vendor/assets/javascripts/#{filename}.min.js http://code.jquery.com/jquery#{suffix}.min.js`
+    puts `curl -o vendor/assets/javascripts/#{filename}.min.js https://code.jquery.com/jquery#{suffix}.min.js`
     puts "Downloading #{filename}.min.map"
-    puts `curl -o vendor/assets/javascripts/#{filename}.min.map http://code.jquery.com/jquery#{suffix}.min.map`
+    puts `curl -o vendor/assets/javascripts/#{filename}.min.map https://code.jquery.com/jquery#{suffix}.min.map`
   end
 
   download_jquery('jquery', Jquery::Rails::JQUERY_VERSION)
