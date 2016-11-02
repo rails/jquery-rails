@@ -56,7 +56,7 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
     jquery_opt    = args.first.is_a?(Symbol) ? args.shift : nil
     id            = args.first.is_a?(String) ? escape_id(args.shift) : nil
 
-    target_pattern   = "['\"\\[]#{id || '.*'}['\"\\]]"
+    target_pattern   = "['\"]#{id || '.*'}['\"]"
     method_pattern   = "#{jquery_method || '\\w+'}"
     argument_pattern = jquery_opt ? "['\"]#{jquery_opt}['\"].*" : PATTERN_HTML
 
