@@ -13,6 +13,7 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
     jQuery("<div><p>something</p></div>").prependTo("#id");
     $('#id').remove();
     jQuery("#id").hide();
+    $("[data-placeholder~=name]").remove();
   JS
 
   setup do
@@ -28,6 +29,7 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
       assert_select_jquery :replaceWith, '#id' do
         assert_select 'p', 'something'
       end
+      assert_select_jquery :remove, "[data-placeholder~=name]"
     end
 
     assert_raise Minitest::Assertion, "No JQuery call matches [:show, :some_wrong]" do

@@ -1,3 +1,7 @@
+## 4.2.2
+
+- Add possibility to test HTML attribute selectors
+
 ## 4.2.1
 
 - Update jQuery to 3.1.0
