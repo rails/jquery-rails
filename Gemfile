@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem "mime-types", "< 3", group: :test
 
-if RUBY_VERSION > '2.2.2'
+if RUBY_VERSION >= '2.2.2'
   gem 'rails'
   gem 'rack'
 else
