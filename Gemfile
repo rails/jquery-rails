@@ -12,5 +12,11 @@ else
   gem 'json', '~> 1.8.0'
 end
 
+if RUBY_VERSION >= '2.1'
+  gem 'nokogiri'
+else
+  gem 'nokogiri', '~> 1.6.0'
+end
+
 # Specify your gem's dependencies in jquery-rails.gemspec
 gemspec
