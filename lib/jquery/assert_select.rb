@@ -54,7 +54,7 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
   def assert_select_jquery(*args, &block)
     jquery_method = args.first.is_a?(Symbol) ? args.shift : nil
     jquery_opt    = args.first.is_a?(Symbol) ? args.shift : nil
-    id            = args.first.is_a?(String) ? args.shift : nil
+    id            = args.first.is_a?(String) ? escape_id(args.shift) : nil
 
     target_pattern   = "['\"]#{id || '.*'}['\"]"
     method_pattern   = "#{jquery_method || '\\w+'}"
@@ -127,5 +127,14 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
       # js encodes non-ascii characters.
       unescaped.gsub!(PATTERN_UNICODE_ESCAPED_CHAR) {|u| [$1.hex].pack('U*')}
       unescaped
+    end
+
+    def escape_id(selector)
+      return unless selector
+
+      id = selector.gsub('[', '\[')
+      id.gsub!(']', '\]')
+
+      id
     end
 end
