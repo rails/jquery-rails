@@ -1,3 +1,6 @@
+## 4.3.0
+
+- update jquery to 3.2.0
 - Add possibility to test HTML attribute selectors
 
 ## 4.2.2
