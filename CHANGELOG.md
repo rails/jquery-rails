@@ -1,3 +1,6 @@
+- Add possibility to test HTML: all, attribute prefix, attribute contains,
+  attribute ends with, child, and class selectors
+
 ## 4.3.1
 
 - update jquery to 3.2.1

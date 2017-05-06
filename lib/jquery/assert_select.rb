@@ -134,6 +134,15 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
 
       id = selector.gsub('[', '\[')
       id.gsub!(']', '\]')
+      id.gsub!('*', '\*')
+      id.gsub!('(', '\(')
+      id.gsub!(')', '\)')
+      id.gsub!('.', '\.')
+      id.gsub!('|', '\|')
+      id.gsub!('^', '\^')
+      id.gsub!('$', '\$')
+      id.gsub!('+', "\\\\+")
+      id.gsub!(',', '\,')
 
       id
     end
