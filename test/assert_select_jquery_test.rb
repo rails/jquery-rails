@@ -10,6 +10,7 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
     $("#id").html('<div><p>something</p></div>');
     jQuery("#id").replaceWith("<div><p>something</p></div>");
     $("<div><p>something</p></div>").appendTo("#id");
+    $("<div><p>something else</p></div>").appendTo("#id");
     jQuery("<div><p>something</p></div>").prependTo("#id");
     $('#id').remove();
     jQuery("#id").hide();
@@ -41,6 +42,7 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
     assert_nothing_raised do
       assert_select_jquery :appendTo, '#id' do
         assert_select 'p', 'something'
+        assert_select 'p', 'something else'
       end
       assert_select_jquery :prependTo, '#id' do
         assert_select 'p', 'something'
