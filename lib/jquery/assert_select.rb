@@ -47,7 +47,7 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
   #   assert_select '.product'
   # end
 
-  PATTERN_HTML  = "['\"]((\\\\\"|[^\"])*)['\"]"
+  PATTERN_HTML  = "['\"]((\\\\\"|\\\\'|[^\"'])*)['\"]"
   PATTERN_UNICODE_ESCAPED_CHAR = /\\u([0-9a-zA-Z]{4})/
   SKELETAL_PATTERN = "(?:jQuery|\\$)\\(%s\\)\\.%s\\(%s\\);"
 
@@ -91,14 +91,14 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
 
     if block_given?
       @selected ||= nil
-      fragments = Nokogiri::HTML::Document.new
+      fragments = Nokogiri::HTML::Document.new.fragment
 
       if matched_pattern
         response.body.scan(Regexp.new(matched_pattern)).each do |match|
           flunk 'This function can\'t have HTML argument' if match.is_a?(String)
 
-          doc = Nokogiri::HTML::Document.parse(unescape_js(match.first))
-          doc.root.children.each do |child|
+          doc = Nokogiri::HTML::DocumentFragment.parse(unescape_js(match.first))
+          doc.children.each do |child|
             fragments << child if child.element?
           end
         end
