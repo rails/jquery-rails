@@ -8,6 +8,7 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
   JAVASCRIPT_TEST_OUTPUT = <<-JS
     $("#card").show("blind", 1000);
     $("#id").html('<div><p>something</p></div>');
+    $('#card').html('<div><p>something else</p></div>');
     jQuery("#id").replaceWith("<div><p>something</p></div>");
     $("<div><p>something</p></div>").appendTo("#id");
     jQuery("<div><p>something</p></div>").prependTo("#id");
@@ -34,6 +35,12 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
 
     assert_raise Minitest::Assertion, "No JQuery call matches [:show, :some_wrong]" do
       assert_select_jquery :show, :some_wrong
+    end
+
+    assert_raise Minitest::Assertion, "<something else> was expected but was <something>" do
+      assert_select_jquery :html, '#id' do
+        assert_select 'p', 'something else'
+      end
     end
   end
 
