@@ -16,6 +16,9 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
     $('#id').remove();
     jQuery("#id").hide();
     $("[data-placeholder~=name]").remove();
+    $("#cart tr:not(.total_line) > *").remove();
+    $("[href|=\"val\"][href$=\"val\"][href^=\"val\"]").remove();
+    $("tr + td, li").remove();
   JS
 
   setup do
@@ -32,6 +35,9 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
         assert_select 'p', 'something'
       end
       assert_select_jquery :remove, "[data-placeholder~=name]"
+      assert_select_jquery :remove, "#cart tr:not(.total_line) > *"
+      assert_select_jquery :remove, "[href|=\"val\"][href$=\"val\"][href^=\"val\"]"
+      assert_select_jquery :remove, "tr + td, li"
     end
 
     assert_raise Minitest::Assertion, "No JQuery call matches [:show, :some_wrong]" do
