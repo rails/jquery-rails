@@ -61,6 +61,8 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
   SKELETAL_PATTERN = "(?:jQuery|\\$)\\(%s\\)\\.%s\\(%s\\);"
 
   def assert_select_jquery(*args, &block)
+    @selected ||= response.body
+
     jquery_method = args.first.is_a?(Symbol) ? args.shift : nil
     jquery_opt    = args.first.is_a?(Symbol) ? args.shift : nil
     id            = args.first.is_a?(String) ? escape_id(args.shift) : nil
@@ -88,7 +90,7 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
 
     matched_pattern = nil
     patterns.each do |pattern|
-      if response.body.match(Regexp.new(pattern))
+      if @selected.match(Regexp.new(pattern))
         matched_pattern = pattern
         break
       end
@@ -100,11 +102,9 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
     end
 
     if block_given?
-      @selected ||= nil
-
       if jquery_opt
         code_blocks = []
-        response.body.scan(Regexp.new(matched_pattern)).each do |match|
+        @selected.scan(Regexp.new(matched_pattern)).each do |match|
           flunk 'This function can\'t have a callback' if match.first.nil?
           code_blocks << match.first
         end
@@ -114,7 +114,7 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
         fragments = Nokogiri::HTML::Document.new.fragment
 
         if matched_pattern
-          response.body.scan(Regexp.new(matched_pattern)).each do |match|
+          @selected.scan(Regexp.new(matched_pattern)).each do |match|
             flunk 'This function can\'t have HTML argument' if match.is_a?(String)
 
             doc = Nokogiri::HTML::DocumentFragment.parse(unescape_js(match.first))

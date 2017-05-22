@@ -52,7 +52,6 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
       assert_select_jquery :hide, :bounce, '#card' do
         # assert multiple jquery calls within different callbacks
         assert_select_jquery :html, '#content' do
-          assert_select 'p', 'something'
           assert_select 'p', 'animating hide'
         end
 
@@ -67,6 +66,15 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
 
     assert_raise Minitest::Assertion, "No JQuery call matches [:show, :some_wrong]" do
       assert_select_jquery :show, :some_wrong
+    end
+
+    assert_raise Minitest::Assertion, "<something> expected but was <animating hide>" do
+      # assure false positives are prevented
+      assert_select_jquery :hide, :bounce, '#card' do
+        assert_select_jquery :html, '#content' do
+          assert_select 'p', 'something'
+        end
+      end
     end
 
     assert_raise Minitest::Assertion, "<something else> was expected but was <something>" do
