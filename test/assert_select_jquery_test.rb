@@ -1,6 +1,5 @@
 require_relative 'test_helper'
 require_relative '../lib/jquery/assert_select'
-
 class AssertSelectJQueryTest < ActiveSupport::TestCase
   include Rails::Dom::Testing::Assertions::SelectorAssertions
   attr_reader :response
@@ -19,6 +18,16 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
     $("#cart tr:not(.total_line) > *").remove();
     $("[href|=\"val\"][href$=\"val\"][href^=\"val\"]").remove();
     $("tr + td, li").remove();
+    $("#card").hide("blind", 100, function() {
+      $("#content").html('<div><p>something</p></div>');
+    });
+    $("#card").hide("bounce", 100, function() {
+      $("#content").html('<div><p>animating hide</p></div>');
+
+      $("#card").show("bounce", 100, function() {
+        $("#content").html('<div><p>animating show</p></div>');
+      });
+    });
   JS
 
   setup do
@@ -38,6 +47,22 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
       assert_select_jquery :remove, "#cart tr:not(.total_line) > *"
       assert_select_jquery :remove, "[href|=\"val\"][href$=\"val\"][href^=\"val\"]"
       assert_select_jquery :remove, "tr + td, li"
+
+      # These allow to assert correct execution order in addition to simple execution assertion
+      assert_select_jquery :hide, :bounce, '#card' do
+        # assert multiple jquery calls within different callbacks
+        assert_select_jquery :html, '#content' do
+          assert_select 'p', 'something'
+          assert_select 'p', 'animating hide'
+        end
+
+        # assert callback-nested jquery calls
+        assert_select_jquery :show, :bounce, '#card' do
+          assert_select_jquery :html, '#content' do
+            assert_select 'p', 'animating show'
+          end
+        end
+      end
     end
 
     assert_raise Minitest::Assertion, "No JQuery call matches [:show, :some_wrong]" do
@@ -48,6 +73,10 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
       assert_select_jquery :html, '#id' do
         assert_select 'p', 'something else'
       end
+    end
+
+    assert_raise Minitest::Assertion, "This function can't have a callback" do
+      assert_select_jquery(:show, :blind, '#card') { }
     end
   end
 
@@ -71,6 +100,10 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
     assert_nothing_raised do
       assert_select_jquery :remove
       assert_select_jquery :hide
+    end
+
+    assert_raise Minitest::Assertion, "This function can't have HTML argument" do
+      assert_select_jquery(:remove) { }
     end
 
     assert_raise Minitest::Assertion, 'No JQuery call matches [:wrong_function]' do
