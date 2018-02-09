@@ -1,6 +1,9 @@
 - Add possibility to test HTML: all, attribute prefix, attribute contains,
   attribute ends with, child, and class selectors
 - Fix matching mutiple calls for the same selector/function exception
+## 4.3.2
+
+- update jquery to 3.3.1
 
 ## 4.3.1
 
