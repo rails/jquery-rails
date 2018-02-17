@@ -1,3 +1,4 @@
+- Allow jQuery calls assertion within nested callbacks
 - Add possibility to test HTML: all, attribute prefix, attribute contains,
   attribute ends with, child, and class selectors
 - Fix matching mutiple calls for the same selector/function exception

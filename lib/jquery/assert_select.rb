@@ -32,13 +32,20 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
   # === Examples
   #
   # # asserts that the #notice element is hidden
-  # assert_select :hide, '#notice'
+  # assert_select_jquery :hide, '#notice'
   #
   # # asserts that the #cart element is shown with a blind parameter
-  # assert_select :show, :blind, '#cart'
+  # assert_select_jquery :show, :blind, '#cart'
+  #
+  # # asserts that the #cart content contains #current_item after a blind effect
+  # assert_select_jquery :hide, :blind, '#cart' do
+  #   assert_select_jquery :html, '#cart' do
+  #     assert_select '#current_item'
+  #   end
+  # end
   #
   # # asserts that #cart content contains a #current_item
-  # assert_select :html, '#cart' do
+  # assert_select_jquery :html, '#cart' do
   #   assert_select '#current_item'
   # end
   #
@@ -47,20 +54,25 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
   #   assert_select '.product'
   # end
 
+  PATTERN_FUNCTION_DECL = "function\\s*\\(.*\\)\\s*"
+  PATTERN_CALLBACK = ".*#{PATTERN_FUNCTION_DECL}(\\{(?:[^{}]|\\g<1>)+\\})"
   PATTERN_HTML  = "['\"]((\\\\\"|\\\\'|[^\"'])*)['\"]"
   PATTERN_UNICODE_ESCAPED_CHAR = /\\u([0-9a-zA-Z]{4})/
   SKELETAL_PATTERN = "(?:jQuery|\\$)\\(%s\\)\\.%s\\(%s\\);"
 
   def assert_select_jquery(*args, &block)
+    @selected ||= response.body
+
     jquery_method = args.first.is_a?(Symbol) ? args.shift : nil
     jquery_opt    = args.first.is_a?(Symbol) ? args.shift : nil
     id            = args.first.is_a?(String) ? escape_id(args.shift) : nil
 
     target_pattern   = "['\"]#{id || '.*'}['\"]"
     method_pattern   = "#{jquery_method || '\\w+'}"
-    argument_pattern = jquery_opt ? "['\"]#{jquery_opt}['\"].*" : PATTERN_HTML
+    argument_pattern = jquery_opt ? "['\"]#{jquery_opt}['\"](?:#{PATTERN_CALLBACK}|.*)" : PATTERN_HTML
 
     # $("#id").show('blind', 1000);
+    # $("#id").show('blind', 1000, function() { ... });
     # $("#id").html("<div>something</div>");
     # $("#id").replaceWith("<div>something</div>");
     target_as_receiver_pattern = SKELETAL_PATTERN % [target_pattern, method_pattern, argument_pattern]
@@ -78,7 +90,7 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
 
     matched_pattern = nil
     patterns.each do |pattern|
-      if response.body.match(Regexp.new(pattern))
+      if @selected.match(Regexp.new(pattern))
         matched_pattern = pattern
         break
       end
@@ -90,30 +102,43 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
     end
 
     if block_given?
-      @selected ||= nil
-      fragments = Nokogiri::HTML::Document.new.fragment
+      if jquery_opt
+        code_blocks = []
+        @selected.scan(Regexp.new(matched_pattern)).each do |match|
+          flunk 'This function can\'t have a callback' if match.first.nil?
+          code_blocks << match.first
+        end
 
-      if matched_pattern
-        response.body.scan(Regexp.new(matched_pattern)).each do |match|
-          flunk 'This function can\'t have HTML argument' if match.is_a?(String)
+        yield_with_content(code_blocks.join("\n"), &block)
+      else
+        fragments = Nokogiri::HTML::Document.new.fragment
 
-          doc = Nokogiri::HTML::DocumentFragment.parse(unescape_js(match.first))
-          doc.children.each do |child|
-            fragments << child if child.element?
+        if matched_pattern
+          @selected.scan(Regexp.new(matched_pattern)).each do |match|
+            flunk 'This function can\'t have HTML argument' if match.is_a?(String)
+
+            doc = Nokogiri::HTML::DocumentFragment.parse(unescape_js(match.first))
+            doc.children.each do |child|
+              fragments << child if child.element?
+            end
           end
         end
-      end
 
-      begin
-        in_scope, @selected = @selected, fragments
-        yield
-      ensure
-        @selected = in_scope
+        yield_with_content(fragments, &block)
       end
     end
   end
 
   private
+
+    def yield_with_content(content)
+      begin
+        in_scope, @selected = @selected, content
+        yield
+      ensure
+        @selected = in_scope
+      end
+    end
 
     # Unescapes a JS string.
     def unescape_js(js_string)
