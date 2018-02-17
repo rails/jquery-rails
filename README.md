@@ -31,7 +31,7 @@ The jquery and jquery-ujs files will be added to the asset pipeline and availabl
 //= require jquery_ujs
 ```
 
-If you are running Rails 5.1 and up, `jquery_ujs` is not needed anymore and you can just add:
+If you are running Rails 5.1 and up, and if you have included `//= require rails-ujs`, then `jquery_ujs` is not needed anymore. You can just add:
 
 ```js
 //= require jquery
