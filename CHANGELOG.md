@@ -1,3 +1,7 @@
+## 3.1.5 (18 Apr 2018)
+
+  - Updated jQuery 1.12.4
+
 ## 3.1.3 (16 June 2015)
 
   - Fix CSP bypass vulnerability. CVE-2015-1840
