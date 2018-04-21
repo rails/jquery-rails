@@ -49,7 +49,7 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
 
   PATTERN_HTML  = "['\"]((\\\\\"|\\\\'|[^\"'])*)['\"]"
   PATTERN_UNICODE_ESCAPED_CHAR = /\\u([0-9a-zA-Z]{4})/
-  SKELETAL_PATTERN = "(?:jQuery|\\$)\\(%s\\)\\.%s\\(%s\\);"
+  SKELETAL_PATTERN = "(?:jQuery|\\$)\\(%s\\)\\.%s\\(%s\\)[;]?"
 
   def assert_select_jquery(*args, &block)
     jquery_method = args.first.is_a?(Symbol) ? args.shift : nil

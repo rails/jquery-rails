@@ -1,3 +1,4 @@
+require 'ostruct'
 require_relative 'test_helper'
 require_relative '../lib/jquery/assert_select'
 
@@ -19,6 +20,9 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
     $("#cart tr:not(.total_line) > *").remove();
     $("[href|=\"val\"][href$=\"val\"][href^=\"val\"]").remove();
     $("tr + td, li").remove();
+
+    // without semicolon
+    $("#browser_cart").hide("blind", 1000)
   JS
 
   setup do
@@ -28,6 +32,7 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
   def test_target_as_receiver
     assert_nothing_raised do
       assert_select_jquery :show, :blind, '#card'
+      assert_select_jquery :hide, :blind, '#browser_cart'
       assert_select_jquery :html, '#id' do
         assert_select 'p', 'something'
       end
