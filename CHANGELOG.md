@@ -1,3 +1,9 @@
+## 4.4.4
+
+- update jquery to 3.4.0
+- set the default jquery to 3.4.0
+
+
 ## 4.3.3
 
 - update jquery to 3.3.1
