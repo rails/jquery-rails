@@ -1,6 +1,6 @@
 # jquery-rails
 
-jQuery! For Rails! So great.
+[jQuery](https://github.com/jquery/jquery)! For [Rails](https://github.com/rails/rails)! So great.
 
 This gem provides:
 
