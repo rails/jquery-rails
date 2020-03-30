@@ -124,6 +124,8 @@ module Rails::Dom::Testing::Assertions::SelectorAssertions
       unescaped.gsub!('\n', "\n")
       unescaped.gsub!('\076', '>')
       unescaped.gsub!('\074', '<')
+      unescaped.gsub!(/\\\$/, '$')
+      unescaped.gsub!(/\\`/, '`')
       # js encodes non-ascii characters.
       unescaped.gsub!(PATTERN_UNICODE_ESCAPED_CHAR) {|u| [$1.hex].pack('U*')}
       unescaped
