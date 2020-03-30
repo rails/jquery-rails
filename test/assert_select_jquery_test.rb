@@ -23,6 +23,8 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
 
     // without semicolon
     $("#browser_cart").hide("blind", 1000)
+
+    $('#item').html('<div><span>\\`Total\\`: \\$12.34</span></div>');
   JS
 
   setup do
@@ -43,6 +45,10 @@ class AssertSelectJQueryTest < ActiveSupport::TestCase
       assert_select_jquery :remove, "#cart tr:not(.total_line) > *"
       assert_select_jquery :remove, "[href|=\"val\"][href$=\"val\"][href^=\"val\"]"
       assert_select_jquery :remove, "tr + td, li"
+
+      assert_select_jquery :html, '#item' do
+        assert_select 'span', '`Total`: $12.34'
+      end
     end
 
     assert_raise Minitest::Assertion, "No JQuery call matches [:show, :some_wrong]" do
