@@ -30,6 +30,7 @@ gem 'jquery-rails'
 ```
 to your Gemfile.
 
+### Rails 5.1 and before
 The jquery and jquery-ujs files will be added to the asset pipeline and available for you to use. If they're not already in `app/assets/javascripts/application.js` by default, add these lines:
 
 ```js
@@ -37,7 +38,6 @@ The jquery and jquery-ujs files will be added to the asset pipeline and availabl
 //= require jquery_ujs
 ```
 
-### Rails 5.1
 If you are running Rails 5.1, and if you have included `//= require rails-ujs`, then `jquery_ujs` is not needed anymore. You can just add:
 
 ```js
@@ -65,6 +65,7 @@ For jQuery UI, we recommend the [jquery-ui-rails](https://github.com/joliss/jque
 jquery-ui-rails gem above.*
 
 ### Rails 5.2
+(TODO: document this)
 
 ### Rails 6.0 + 6.1 With Webpacker
 
