@@ -86,6 +86,12 @@ environment.plugins.prepend('Provide',
 
 
 
+Then add this line to `app/javacsripts/packs/application.js` (or to any pack where you need jQuery)
+```
+require('jquery')
+```
+
+
 # Troubleshooeting
 
 Note that newers browsers implement an object that is also `$`, so if you haven't installed jQuery correctly you will get the native HTML `$` object instead of jQuery. 
