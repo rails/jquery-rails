@@ -18,5 +18,9 @@ else
   gem 'nokogiri', '~> 1.6.0'
 end
 
+if RUBY_VERSION >= '2.4'
+  gem 'rubocop-packaging', '~> 0.5'
+end
+
 # Specify your gem's dependencies in jquery-rails.gemspec
 gemspec
