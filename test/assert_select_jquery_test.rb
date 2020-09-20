@@ -1,6 +1,6 @@
 require 'ostruct'
+require 'jquery/assert_select'
 require_relative 'test_helper'
-require_relative '../lib/jquery/assert_select'
 
 class AssertSelectJQueryTest < ActiveSupport::TestCase
   include Rails::Dom::Testing::Assertions::SelectorAssertions
