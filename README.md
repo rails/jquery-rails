@@ -71,6 +71,13 @@ You're done!
 *As of v3.0, jquery-rails no longer includes jQuery UI, you will need to
 install it by yourself as needed.*
 
+## Building the javascript assets
+
+You can build the minified version fo the jquery lib and its accompanying map file using:
+
+```bash
+uglifyjs jquery.js --source-map "filename='jquery.min.map'" -o jquery.min.js
+```
 ## Contributing
 
 Feel free to open an issue ticket if you find something that could be improved. A couple notes:
