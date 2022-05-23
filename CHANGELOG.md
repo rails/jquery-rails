@@ -1,3 +1,7 @@
+## 4.5.0
+
+- update jquery to 3.6.0
+
 ## 4.4.0
 
 - update jquery to 3.5.1 (note: [3.5.0 contains important security updates](https://github.com/advisories/GHSA-jpcq-cgw6-v4j6))
