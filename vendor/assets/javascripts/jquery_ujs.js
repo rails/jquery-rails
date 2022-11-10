@@ -1,4 +1,4 @@
-(function($, undefined) {
+/* jshint node: true */
 
 /**
  * Unobtrusive scripting adapter for jQuery
@@ -10,10 +10,13 @@
  *
  */
 
-  // Cut down on the number of issues from people inadvertently including jquery_ujs twice
-  // by detecting and raising an error when it happens.
+(function() {
   'use strict';
 
+  var jqueryUjsInit = function($, undefined) {
+
+  // Cut down on the number of issues from people inadvertently including jquery_ujs twice
+  // by detecting and raising an error when it happens.
   if ( $.rails !== undefined ) {
     $.error('jquery-ujs has already been loaded!');
   }
@@ -33,10 +36,10 @@
     inputChangeSelector: 'select[data-remote], input[data-remote], textarea[data-remote]',
 
     // Form elements bound by jquery-ujs
-    formSubmitSelector: 'form',
+    formSubmitSelector: 'form:not([data-turbo=true])',
 
     // Form input elements bound by jquery-ujs
-    formInputClickSelector: 'form input[type=submit], form input[type=image], form button[type=submit], form button:not([type]), input[type=submit][form], input[type=image][form], button[type=submit][form], button[form]:not([type])',
+    formInputClickSelector: 'form:not([data-turbo=true]) input[type=submit], form:not([data-turbo=true]) input[type=image], form:not([data-turbo=true]) button[type=submit], form:not([data-turbo=true]) button:not([type]), input[type=submit][form], input[type=image][form], button[type=submit][form], button[form]:not([type])',
 
     // Form input elements disabled during form submission
     disableSelector: 'input[data-disable-with]:enabled, button[data-disable-with]:enabled, textarea[data-disable-with]:enabled, input[data-disable]:enabled, button[data-disable]:enabled, textarea[data-disable]:enabled',
@@ -372,7 +375,7 @@
         element.html(replacement);
       }
 
-      element.bind('click.railsDisable', function(e) { // prevent further clicking
+      element.on('click.railsDisable', function(e) { // prevent further clicking
         return rails.stopEverything(e);
       });
       element.data('ujs:disabled', true);
@@ -384,7 +387,7 @@
         element.html(element.data('ujs:enable-with')); // set to old enabled state
         element.removeData('ujs:enable-with'); // clean up cache
       }
-      element.unbind('click.railsDisable'); // enable element
+      element.off('click.railsDisable'); // enable element
       element.removeData('ujs:disabled');
     }
   };
@@ -552,4 +555,11 @@
     });
   }
 
-})( jQuery );
+  };
+
+  if (window.jQuery) {
+    jqueryUjsInit(jQuery);
+  } else if (typeof exports === 'object' && typeof module === 'object') {
+    module.exports = jqueryUjsInit;
+  }
+})();
