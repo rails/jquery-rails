@@ -1,5 +1,7 @@
 ## unreleased
 
+- update jquery to 3.7.0
+
 ## 4.5.1
 
 - update jquery to 3.6.1
