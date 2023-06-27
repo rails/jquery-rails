@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails-dom-testing", ">= 1", "< 3"
 
-  s.files        = `git ls-files`.split("\n")
-  s.executables  = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
+  s.files        = Dir["{lib,vendor}/**/*", "CHANGELOG.md", "MIT-LICENSE", "README.md", "VERSIONS.md"]
   s.require_path = 'lib'
 end
