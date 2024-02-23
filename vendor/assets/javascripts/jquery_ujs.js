@@ -228,7 +228,7 @@
       if (target) { form.attr('target', target); }
 
       form.hide().append(metadataInput).appendTo('body');
-      form.submit();
+      form.trigger('submit');
     },
 
     // Helper function that returns form elements that match the specified CSS selector
